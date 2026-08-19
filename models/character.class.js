@@ -1,9 +1,9 @@
 class Character extends Movable {
     height = 250;
     pepeWalkImages = ImageHub.PEPE.walk;
-    currentImage = 0;
     world;
     speed = 5;
+    currentImage = 0;
 
     constructor() {
         super().loadImage(ImageHub.PEPE.ideal);
@@ -35,7 +35,7 @@ class Character extends Movable {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
                 //walk animation
                 let i = this.currentImage % this.pepeWalkImages.length;
-                let path = ImageHub.PEPE.walk[i];
+                let path = this.pepeWalkImages[i];
                 this.img = this.imageCache[path];
                 this.currentImage++;
             }
