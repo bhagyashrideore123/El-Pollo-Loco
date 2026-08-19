@@ -1,22 +1,32 @@
-class Movable{
+class Movable {
     x = 120;
     y = 200;
     img;
     height = 100;
     width = 100;
+    imageCache = {};
+    speed = 0.1;
 
-    loadImage(path){
+    loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
         this.img.src = path;
     }
 
-    
-
-    moveRight(){
-        console.log("moving right");        
+    loadImages(array) {
+        array.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        });
     }
 
-    moveLeft(){
-        console.log("moving left");  
+    moveRight() {
+        console.log("moving right");
+    }
+
+    moveLeft() {
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60); //mostly games run animation of 60 frames per second.
     }
 }

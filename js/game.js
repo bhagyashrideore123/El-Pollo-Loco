@@ -1,13 +1,13 @@
 let Canvas;
 let world;
+let keyboard = new Keyboard();
 
 function init() {
+    Keyboard.keyboard_eventListener();
     canvas = document.getElementById("canvas");
-    world = new World(canvas);
-
-
-    console.log("my world is:", world);
-    console.log("my character is:", world.character);
-    console.log("enemies",world.enemies);
-    
+    world = new World(canvas,keyboard);
+    console.log(world);
 }
+
+
+    

@@ -10,11 +10,19 @@ class World {
     ];
     contex;
     canvas;
+    keyboard;
 
-    constructor(_Canvas) {
+    setWorld()
+    {//we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
+        this.character.world = this;
+    }
+
+    constructor(_Canvas, _keyboard) {
         this.canvas = _Canvas;
         this.contex = this.canvas.getContext("2d");
+        this.keyboard = _keyboard;
         this.draw();
+        this.setWorld();
     }
 
     //we have to execute this method only if our img is loaded.hence we call draw again inside it. (requestAnimationFrame)
@@ -43,4 +51,5 @@ class World {
         //here we give movable object to canvas.
         this.contex.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }
+
 }
