@@ -6,7 +6,7 @@ function init() {
     world = new World(canvas);
 
 
-
+    console.log("my world is:", world);
     console.log("my character is:", world.character);
     console.log("enemies",world.enemies);
     

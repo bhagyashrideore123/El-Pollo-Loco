@@ -1,44 +1,46 @@
-class World{
+class World {
     character = new Character();
-    enemies = [
-        new Chicken(), 
-        new Chicken(), 
-        new Chicken()
-        ];
-    clouds = [
-        new Clouds()
-    ]
+    enemies = [new Chicken(), new Chicken(), new Chicken()];
+    clouds = [new Clouds()];
+    backgrounds = [
+        new Background("img/5_background/layers/air.png", 0),
+        new Background("img/5_background/layers/3_third_layer/1.png", 0),
+        new Background("img/5_background/layers/2_second_layer/1.png", 0),
+        new Background("img/5_background/layers/1_first_layer/1.png", 0),
+    ];
     contex;
     canvas;
 
-
-    constructor(_Canvas)
-    {
+    constructor(_Canvas) {
         this.canvas = _Canvas;
         this.contex = this.canvas.getContext("2d");
         this.draw();
     }
 
     //we have to execute this method only if our img is loaded.hence we call draw again inside it. (requestAnimationFrame)
-    draw()
-    {
+    draw() {
+        //clear canvas before drawing anything to reduce duplicate characters drawing
         this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.contex.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        
-        this.enemies.forEach(enemie => {
-        this.contex.drawImage(enemie.img, enemie.x, enemie.y, enemie.width, enemie.height);
-        });
+        this.objectsToMap(this.backgrounds);
+        this.objectsToMap(this.clouds);
+        this.addToMap(this.character);
+        this.objectsToMap(this.enemies);
 
-        this.clouds.forEach(clouds => {
-        this.contex.drawImage(clouds.img, clouds.x, clouds.y, clouds.width, clouds.height);
-        });
-
-
-        //here we have to use to load img before it draw on canvas.
         //draw() wird immer aufgerufen.
         let self = this;
-        requestAnimationFrame(function(){
+        requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+    objectsToMap(objects) {
+        objects.forEach((obj) => {
+            this.addToMap(obj);
+        });
+    }
+
+    addToMap(mo) {
+        //here we give movable object to canvas.
+        this.contex.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }
 }

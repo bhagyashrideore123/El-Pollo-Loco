@@ -1,6 +1,6 @@
 class Movable{
     x = 120;
-    y = 250;
+    y = 200;
     img;
     height = 100;
     width = 100;
@@ -9,6 +9,8 @@ class Movable{
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
         this.img.src = path;
     }
+
+    
 
     moveRight(){
         console.log("moving right");        
