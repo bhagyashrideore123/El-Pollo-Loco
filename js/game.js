@@ -6,7 +6,6 @@ function init() {
     Keyboard.keyboard_eventListener();
     canvas = document.getElementById("canvas");
     world = new World(canvas,keyboard);
-    console.log(world);
 }
 
 

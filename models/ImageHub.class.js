@@ -1,43 +1,36 @@
 class ImageHub extends World {
-    static chickens = [
+    static CHICKEN = 
         {
             walk: [
                 "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
                 "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
                 "img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
             ],
-        },
-        {
             ideal: ["img/3_enemies_chicken/chicken_small/1_walk/1_w.png"],
-        },
-        {
-            dead: ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"],
-        },
-    ];
+            dead: ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"]
+        };
 
-    static clouds = [" img/5_background/layers/4_clouds/1.png"];
+    static CLOUDS = [" img/5_background/layers/4_clouds/1.png"];
 
-    static backgrounds = [
+    static BACKGROUNDS = 
         {
         layer_1:[
                 "img/5_background/layers/air.png",
                 "img/5_background/layers/3_third_layer/1.png",
                 "img/5_background/layers/2_second_layer/1.png",
                 "img/5_background/layers/1_first_layer/1.png",
-            ]
-        },
-        {
+            ],
         layer_2:[
                 "img/5_background/layers/air.png",
                 "img/5_background/layers/3_third_layer/2.png",
                 "img/5_background/layers/2_second_layer/2.png",
                 "img/5_background/layers/1_first_layer/2.png",
             ]
-        }
-       
-    ];
+        };
 
-    static pepe = [
+    
+
+    static PEPE = 
         {
             walk: [
                 "img/2_character_pepe/2_walk/W-21.png",
@@ -47,8 +40,7 @@ class ImageHub extends World {
                 "img/2_character_pepe/2_walk/W-25.png",
                 "img/2_character_pepe/2_walk/W-26.png"
             ],
-        },
-        {
+    
             jump: [
                 "img/2_character_pepe/3_jump/J-31.png",
                 "img/2_character_pepe/3_jump/J-32.png",
@@ -60,9 +52,36 @@ class ImageHub extends World {
                 "img/2_character_pepe/3_jump/J-38.png",
                 "img/2_character_pepe/3_jump/J-39.png"
             ],
-        },
-        {
+
             ideal: ["img/2_character_pepe/2_walk/W-21.png"],
-        },
-    ];
+        }
+
+    static BOSS = {
+        run: [
+            "assets/img/4_enemie_boss_chicken/1_walk/G1.png",
+            "assets/img/4_enemie_boss_chicken/1_walk/G2.png",
+            "assets/img/4_enemie_boss_chicken/1_walk/G3.png",
+            "assets/img/4_enemie_boss_chicken/1_walk/G4.png",
+        ],
+        angry: [
+            "assets/img/4_enemie_boss_chicken/2_alert/G5.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G6.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G7.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G8.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G9.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G10.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G11.png",
+            "assets/img/4_enemie_boss_chicken/2_alert/G12.png",
+        ],
+        attacking: [
+            "assets/img/4_enemie_boss_chicken/3_attack/G13.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G14.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G15.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G16.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G17.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G18.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G19.png",
+            "assets/img/4_enemie_boss_chicken/3_attack/G20.png",
+        ],
+    };
 }

@@ -1,23 +1,28 @@
 class Character extends Movable {
     height = 250;
+    pepeWalkImages = ImageHub.PEPE.walk;
     currentImage = 0;
     world;
     speed = 5;
 
     constructor() {
-        super().loadImage(ImageHub.pepe[2].ideal);
-        this.loadImages(ImageHub.pepe[0].walk);
+        super().loadImage(ImageHub.PEPE.ideal);
+        this.loadImages(this.pepeWalkImages);
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            if (Keyboard.ArrowRight) {
+            if (Keyboard.ArrowRight && this.x < this.world.level.levelEnd_x) {
                 this.x += this.speed;
+                this.otherDirection = false;
+
             }
-            if (Keyboard.ArrowLeft) {
+            if (Keyboard.ArrowLeft && this.x > 0 ) {
                 this.x -= this.speed;
+                this.otherDirection = true;
             }
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60); //60 frames per second
 
         setInterval(() => {
@@ -29,8 +34,8 @@ class Character extends Movable {
             //OUTPUT: i  = 0,1,2,3,4,5,0,1,2,3......
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
                 //walk animation
-                let i = this.currentImage % ImageHub.pepe[0].walk.length;
-                let path = ImageHub.pepe[0].walk[i];
+                let i = this.currentImage % this.pepeWalkImages.length;
+                let path = ImageHub.PEPE.walk[i];
                 this.img = this.imageCache[path];
                 this.currentImage++;
             }

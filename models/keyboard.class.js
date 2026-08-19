@@ -7,18 +7,39 @@ class Keyboard {
 
     static keyboard_eventListener() {
         window.addEventListener("keydown", (event) => {
-            console.log("key pressed: ", event);
-
             if (event.keyCode == 37) {
                 Keyboard.ArrowLeft = true;
-            } else if (event.keyCode == 39) {
+            }
+            if (event.keyCode == 39) {
                 Keyboard.ArrowRight = true;
-            } else if (event.keyCode == 32) {
+            }
+            if (event.keyCode == 32) {
                 Keyboard.SPACE = true;
-            } else if (event.keyCode == 38) {
+            }
+            if (event.keyCode == 38) {
                 Keyboard.ArrowUp = true;
-            } else if (event.keyCode == 40) {
+            }
+            if (event.keyCode == 40) {
                 Keyboard.ArrowDown = true;
+            }
+        });
+
+    window.addEventListener("keyup", (event) => {
+
+            if (event.keyCode == 37) {
+                Keyboard.ArrowLeft = false;
+            }
+            if (event.keyCode == 39) {
+                Keyboard.ArrowRight = false;
+            }
+            if (event.keyCode == 32) {
+                Keyboard.SPACE = false;
+            }
+            if (event.keyCode == 38) {
+                Keyboard.ArrowUp = false;
+            }
+            if (event.keyCode == 40) {
+                Keyboard.ArrowDown = false;
             }
         });
     }

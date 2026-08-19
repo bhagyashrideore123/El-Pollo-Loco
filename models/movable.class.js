@@ -6,6 +6,7 @@ class Movable {
     width = 100;
     imageCache = {};
     speed = 0.1;
+    otherDirection = false;
 
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
@@ -21,7 +22,6 @@ class Movable {
     }
 
     moveRight() {
-        console.log("moving right");
     }
 
     moveLeft() {
