@@ -3,7 +3,7 @@ class Character extends Movable {
     pepeWalkImages = ImageHub.PEPE.walk;
     world;
     speed = 5;
-    currentImage = 0;
+    //currentImage = 0;
 
     constructor() {
         super().loadImage(ImageHub.PEPE.ideal);
@@ -33,11 +33,7 @@ class Character extends Movable {
             // let i = 6 % 6; 0, rest 0  > here our array will reset and it will start iterating with 0th image again.
             //OUTPUT: i  = 0,1,2,3,4,5,0,1,2,3......
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
-                //walk animation
-                let i = this.currentImage % this.pepeWalkImages.length;
-                let path = this.pepeWalkImages[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
+                this.playAnimation(this.pepeWalkImages);
             }
         }, 50);
     }

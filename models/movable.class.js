@@ -7,6 +7,7 @@ class Movable {
     imageCache = {};
     speed = 0.1;
     otherDirection = false;
+    currentImage = 0;
 
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
@@ -28,5 +29,13 @@ class Movable {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60); //mostly games run animation of 60 frames per second.
+    }
+
+    playAnimation(array)
+    {
+            let i = this.currentImage % array.length;
+            let path = array[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
     }
 }

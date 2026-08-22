@@ -5,7 +5,7 @@ class Chicken extends Movable {
 
     chickenImages = ImageHub.CHICKEN;
     speed = 0.15// we make speed here different so taht it will look dynamic
-    currentImage = 0;
+    // currentImage = 0;
 
     constructor() {
         super().loadImage(this.chickenImages.ideal);
@@ -18,12 +18,8 @@ class Chicken extends Movable {
     animate() {
         this.moveLeft();
         setInterval(() => {
-            let i = this.currentImage % this.chickenImages.walk.length;
-            let path = ImageHub.CHICKEN.walk[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
+            this.playAnimation(this.chickenImages.walk);
         }, 100);
-
 
     }
 }

@@ -25,10 +25,12 @@ class World {
     draw() {
         this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height); //clear canvas before drawing anything to reduce duplicate characters drawing
         this.contex.translate(this.camera_x,0); //we are shifting x cordinator here to -100.verytime this excutes this line will add extra 100 px to x axis.
+        
         this.objectsToMap(this.level.backgrounds );
         this.objectsToMap(this.level.clouds);
-        this.addToMap(this.character);
+        this.addToMap(this.character);        
         this.objectsToMap(this.level.enemies);
+    
         this.contex.translate(-this.camera_x,0);        
         let self = this; //draw() wird immer aufgerufen.
         requestAnimationFrame(function () {
