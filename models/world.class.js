@@ -60,7 +60,5 @@ class World {
         this.contex.translate(mo.width, 0);
         this.contex.scale(-1, 1);
         mo.x = mo.x * -1;
-    }
-
-
+    }   
 }
