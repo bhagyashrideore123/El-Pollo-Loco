@@ -51,4 +51,25 @@ class Movable {
     isAboveGround() {
         return this.y < 180;
     }
+
+    drawFrame(contex)
+    {
+        if(this instanceof Character || this instanceof Chicken)//draw rectangale frame only for character and chicken instances
+        {
+        contex.beginPath();
+        contex.lineWidth = "5";
+        contex.strokeStyle = "blue";
+        contex.rect(this.x, this.y, this.width, this.height); //here calculate width and height of rectangle
+        contex.stroke();
+        }      
+    }
+
+    //charcater.isColliding(chicken);
+    isColliding(mo)
+    {
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height;
+    }
 }

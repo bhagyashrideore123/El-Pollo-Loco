@@ -1,4 +1,5 @@
 class Character extends Movable {
+    x = 200;
     y = 180;
     height = 250;
     pepeWalkImages = ImageHub.PEPE.walk;
@@ -16,16 +17,16 @@ class Character extends Movable {
 
     animate() {
         setInterval(() => {
-            Global.pause();
+           // Globals.pause();
             if (Keyboard.ArrowRight && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                Global.playWalk();
+                //Globals.playWalk();
             }
             if (Keyboard.ArrowLeft && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                Global.playWalk();
+               // Globals.playWalk();
             }
             if (Keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();

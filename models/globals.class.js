@@ -1,5 +1,5 @@
-class Global extends World{
-    static Sound;
+class Globals extends World{
+    static Sound = new Audio('../audio/walk.mp3');
 
     static playWalk()
     {
