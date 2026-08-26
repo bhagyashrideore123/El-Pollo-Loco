@@ -8,5 +8,10 @@ function init() {
     world = new World(canvas,keyboard);
 }
 
+function resizeCanvas() {
+    canvas.requestFullscreen();
+}
+
+
 
     

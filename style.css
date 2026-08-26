@@ -1,9 +1,67 @@
+/* handjet-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Handjet';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/handjet-v22-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* handjet-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Handjet';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/handjet-v22-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* handjet-900 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Handjet';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/handjet-v22-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    background-image: url('img/9_intro_outro_screens/GameBackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family:'Handjet';
 }
 
 canvas{
     background-color: black;
+    border: 10px dashed white;
+    display: block;
+}
+
+h1{
+    font-size: 8rem;
+}
+
+/* media query for smartphones */
+@media only screen and (max-width:720){
+    canvas{
+        width: 100%;
+    }   
+}
+/* media query for smartphones */
+@media only screen and (max-height:480){
+    canvas{
+        height: 100dvh;
+    }   
 }

@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El-Pollo-Loco</title>
     <link rel="stylesheet" href="style.css">
+    <script src="./models/drawable.class.js"></script>
     <script src="./models/movable.class.js" ></script>
     <script src="./models/character.class.js" ></script>
     <script src="./models/chicken.class.js" ></script>
+    <script src="./models/MiniChicken.class.js" ></script>   
+    <script src="./models/health-statusbar.class.js"></script> 
+    <script src="./models/coins_statusbar.class.js"></script> 
+    <script src="./models/bottles_statusbar.class.js"></script> 
     <script src="./models/world.class.js" ></script>
     <script src="./models/clouds.class.js" ></script>
     <script src="./models/background.class.js" ></script>
@@ -15,12 +20,15 @@
     <script src="./models/globals.class.js" ></script>
     <script src="./models/keyboard.class.js"></script>
     <script src="./models/level.class.js"></script>
-    <script src="./models/endboss.class.js"></script>
+    <script src="./models/throwable.class.js"></script>
+    <script src="./models/endboss.class.js"></script>   
     <script src="./js/levels/level1.js" defer></script>
     <script src="./js/game.js" defer></script>    
 </head>
 <body onload="init()">
     <h1>El POLLO LOCO</h1>
-    <canvas id="canvas" width="720" height="480"></canvas>
+  <!-- <button onclick="resizeCanvas()">fullscreen</button> -->
+    <canvas id="canvas" width="720" height="480">
+    </canvas>
 </body>
 </html>

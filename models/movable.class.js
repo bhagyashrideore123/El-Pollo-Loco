@@ -1,27 +1,25 @@
-class Movable {
-    x = 120;
-    y = 200;
-    img;
-    height = 100;
-    width = 100;
-    imageCache = {};
+class Movable extends Drawable {
     speed = 0.1;
     otherDirection = false;
-    currentImage = 0;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
+    lastHit = 0;
+    offset = { 
+        top: 100, //we set smallest border for each moving object here with the help of offset
+        right: 10,
+        bottom: 10,
+        left: 30
+    };
+    rX; //real X
+    rY; //real Y
+    rW; //real width
+    rH; //real height
 
-    loadImage(path) {
-        this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
-        this.img.src = path;
-    }
-
-    loadImages(array) {
-        array.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
+    constructor()
+    {
+        super();
+        //this.getRealFrame();
     }
 
     moveRight() {
@@ -49,27 +47,45 @@ class Movable {
     }
 
     isAboveGround() {
-        return this.y < 180;
-    }
-
-    drawFrame(contex)
-    {
-        if(this instanceof Character || this instanceof Chicken)//draw rectangale frame only for character and chicken instances
+        if(this instanceof Throwable) //trwable obj should should always fall
         {
-        contex.beginPath();
-        contex.lineWidth = "5";
-        contex.strokeStyle = "blue";
-        contex.rect(this.x, this.y, this.width, this.height); //here calculate width and height of rectangle
-        contex.stroke();
-        }      
+            return true;
+        }else{
+            return this.y < 180;
+        }
+        
     }
 
     //charcater.isColliding(chicken);
-    isColliding(mo)
+    isColliding(mo) {
+        return this.rX + this.rW > mo.rX &&
+            this.rY + this.rH > mo.rY &&
+            this.rX < mo.rX + mo.rW &&
+            this.rY < mo.rY + mo.rH;
+    }
+
+    getRealFrame()
     {
-        return this.x + this.width > mo.x &&
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height;
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width-this.offset.left-this.offset.right;
+        this.rH = this.height-this.offset.top-this.offset.bottom;
+    }
+
+    hit() {
+        this.energy -= 5; //when they meet reduce energy of character
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; //diffrence in miliseconds
+        timePassed = timePassed / 1000; //difference in seconds
+        return timePassed < 0.8;
+    }
+    isDead() {
+        return this.energy == 0;
     }
 }

@@ -1,58 +1,78 @@
 class ImageHub extends World {
-    static CHICKEN = 
-        {
-            walk: [
-                "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-                "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-                "img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
-            ],
-            ideal: ["img/3_enemies_chicken/chicken_small/1_walk/1_w.png"],
-            dead: ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"]
-        };
 
-    static CLOUDS = [" img/5_background/layers/4_clouds/1.png"];
+    static CHICKEN = {
+        walk: [
+            "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+            "img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+            "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+        ],
+        ideal: ["img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"],
+        dead: ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"],
+    };
 
-    static BACKGROUNDS = 
-        {
-        layer_1:[
-                "img/5_background/layers/air.png",
-                "img/5_background/layers/3_third_layer/1.png",
-                "img/5_background/layers/2_second_layer/1.png",
-                "img/5_background/layers/1_first_layer/1.png",
-            ],
-        layer_2:[
-                "img/5_background/layers/air.png",
-                "img/5_background/layers/3_third_layer/2.png",
-                "img/5_background/layers/2_second_layer/2.png",
-                "img/5_background/layers/1_first_layer/2.png",
-            ]
-        };    
+    static MINICHICKEN ={
+        walk: [
+            "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+            "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+            "img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+        ],
+        ideal: ["img/3_enemies_chicken/chicken_small/1_walk/1_w.png"],
+        dead: ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"],
+    }
 
-    static PEPE = 
-        {
-            walk: [
-                "img/2_character_pepe/2_walk/W-21.png",
-                "img/2_character_pepe/2_walk/W-22.png",
-                "img/2_character_pepe/2_walk/W-23.png",
-                "img/2_character_pepe/2_walk/W-24.png",
-                "img/2_character_pepe/2_walk/W-25.png",
-                "img/2_character_pepe/2_walk/W-26.png"
-            ],
-    
-            jump: [
-                "img/2_character_pepe/3_jump/J-31.png",
-                "img/2_character_pepe/3_jump/J-32.png",
-                "img/2_character_pepe/3_jump/J-33.png",
-                "img/2_character_pepe/3_jump/J-34.png",
-                "img/2_character_pepe/3_jump/J-35.png",
-                "img/2_character_pepe/3_jump/J-36.png",
-                "img/2_character_pepe/3_jump/J-37.png",
-                "img/2_character_pepe/3_jump/J-38.png",
-                "img/2_character_pepe/3_jump/J-39.png"
-            ],
+    static BACKGROUNDS = {
+        layer_1: [
+            "img/5_background/layers/air.png",
+            "img/5_background/layers/3_third_layer/1.png",
+            "img/5_background/layers/2_second_layer/1.png",
+            "img/5_background/layers/1_first_layer/1.png",
+        ],
+        layer_2: [
+            "img/5_background/layers/air.png",
+            "img/5_background/layers/3_third_layer/2.png",
+            "img/5_background/layers/2_second_layer/2.png",
+            "img/5_background/layers/1_first_layer/2.png",
+        ],
+    };
 
-            ideal: ["img/2_character_pepe/2_walk/W-21.png"],
-        }
+    static PEPE = {
+        walk: [
+            "img/2_character_pepe/2_walk/W-21.png",
+            "img/2_character_pepe/2_walk/W-22.png",
+            "img/2_character_pepe/2_walk/W-23.png",
+            "img/2_character_pepe/2_walk/W-24.png",
+            "img/2_character_pepe/2_walk/W-25.png",
+            "img/2_character_pepe/2_walk/W-26.png",
+        ],
+
+        jump: [
+            "img/2_character_pepe/3_jump/J-31.png",
+            "img/2_character_pepe/3_jump/J-32.png",
+            "img/2_character_pepe/3_jump/J-33.png",
+            "img/2_character_pepe/3_jump/J-34.png",
+            "img/2_character_pepe/3_jump/J-35.png",
+            "img/2_character_pepe/3_jump/J-36.png",
+            "img/2_character_pepe/3_jump/J-37.png",
+            "img/2_character_pepe/3_jump/J-38.png",
+            "img/2_character_pepe/3_jump/J-39.png",
+        ],
+
+        ideal: ["img/2_character_pepe/2_walk/W-21.png"],
+        dead: [
+            "img/2_character_pepe/5_dead/D-51.png",
+            "img/2_character_pepe/5_dead/D-52.png",
+            "img/2_character_pepe/5_dead/D-53.png",
+            "img/2_character_pepe/5_dead/D-54.png",
+            "img/2_character_pepe/5_dead/D-55.png",
+            "img/2_character_pepe/5_dead/D-56.png",
+            "img/2_character_pepe/5_dead/D-57.png",
+        ],
+        hurt: [
+            "img/2_character_pepe/4_hurt/H-41.png",
+            "img/2_character_pepe/4_hurt/H-42.png",
+            "img/2_character_pepe/4_hurt/H-43.png",
+        ],
+    };
 
     static BOSS = {
         walk: [
@@ -80,6 +100,51 @@ class ImageHub extends World {
             "img/4_enemie_boss_chicken/3_attack/G18.png",
             "img/4_enemie_boss_chicken/3_attack/G19.png",
             "img/4_enemie_boss_chicken/3_attack/G20.png",
+        ],
+    };
+
+    static STATUSBAR = {
+        health: [
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png",
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png",
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
+            "img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png",
+        ],
+        coins: [
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/40.png",
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/60.png",
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/80.png",
+            "img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
+        ],
+        bottles: [
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png",
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png",
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
+            "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
+        ],
+    };
+
+    static SALSABOTTOL = {
+        rotation: [
+            "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+            "img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+            "img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+            "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+        ],
+        bottle: ["img/6_salsa_bottle/salsa_bottle.png"],
+        bottle_splash: [
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+            "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
         ],
     };
 }

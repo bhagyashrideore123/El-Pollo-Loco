@@ -4,6 +4,7 @@ class Keyboard {
     static SPACE = false;
     static ArrowUp = false;
     static ArrowDown = false;
+    static D = false;
 
     static keyboard_eventListener() {
         window.addEventListener("keydown", (event) => {
@@ -21,6 +22,9 @@ class Keyboard {
             }
             if (event.keyCode == 40) {
                 Keyboard.ArrowDown = true;
+            }
+            if (event.keyCode == 68) {
+                Keyboard.D = true;
             }
         });
 
@@ -40,6 +44,9 @@ class Keyboard {
             }
             if (event.keyCode == 40) {
                 Keyboard.ArrowDown = false;
+            }
+            if (event.keyCode == 68) {
+                Keyboard.D = false;
             }
         });
     }
