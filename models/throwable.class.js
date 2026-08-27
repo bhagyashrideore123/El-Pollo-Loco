@@ -10,6 +10,7 @@ class Throwable extends Movable{
         this.y = _y;
         this.throw();
     }
+    
     throw()
     {
         this.speedY = 30;

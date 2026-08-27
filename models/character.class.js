@@ -1,4 +1,4 @@
-class Character extends Movable {
+ class Character extends Movable {
     x = 200;
     y = 180;
     height = 250;
@@ -17,7 +17,7 @@ class Character extends Movable {
         this.loadImages(this.pepeDeadImages);
         this.loadImages(this.pepeHitImages);
         this.applyGravity();
-        //dthis.getRealFrame();
+        this.getRealFrame();
         this.animate();
     }
 

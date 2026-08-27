@@ -1,4 +1,4 @@
-class Chicken extends Movable {
+ class Chicken extends Movable {
     y = 360;
     height = 80;
     width = 80;
@@ -14,8 +14,8 @@ class Chicken extends Movable {
         super().loadImage(this.chickenImages.ideal);
         this.loadImages(this.chickenImages.walk);
         this.x = 200 + Math.random() * 1200; //chickens start at 200px and then next cheickens will come after that.
-        this.speed = this.speed + Math.random() * 0.25;   
-       // this.getRealFrame();    
+        this.speed = this.speed + Math.random() * 0.25; 
+        this.getRealFrame();     
         this.animate();
     }
 

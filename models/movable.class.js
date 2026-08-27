@@ -58,6 +58,8 @@ class Movable extends Drawable {
 
     //charcater.isColliding(chicken);
     isColliding(mo) {
+        this.getRealFrame();
+        mo.getRealFrame();
         return this.rX + this.rW > mo.rX &&
             this.rY + this.rH > mo.rY &&
             this.rX < mo.rX + mo.rW &&
@@ -68,8 +70,8 @@ class Movable extends Drawable {
     {
         this.rX = this.x + this.offset.left;
         this.rY = this.y + this.offset.top;
-        this.rW = this.width-this.offset.left-this.offset.right;
-        this.rH = this.height-this.offset.top-this.offset.bottom;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
     }
 
     hit() {

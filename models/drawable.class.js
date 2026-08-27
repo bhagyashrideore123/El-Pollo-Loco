@@ -28,10 +28,7 @@ class Drawable {
     }
 
     drawFrame(contex) {
-        if (
-            this instanceof Character ||
-            this instanceof Chicken
-        ) //draw rectangale frame only for character and chicken instances
+        if ( this instanceof Character ||  this instanceof Chicken ) //draw rectangale frame only for character and chicken instances
         {
             contex.beginPath();
             contex.lineWidth = "3";
