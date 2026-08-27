@@ -49,6 +49,7 @@
             //OUTPUT: i  = 0,1,2,3,4,5,0,1,2,3......
             if (this.isDead()) {
                 this.playAnimation(this.pepeDeadImages);
+                //show game over here............
             } else if (this.isHurt()) {
                 this.playAnimation(this.pepeHitImages);
             } else if (this.isAboveGround()) {

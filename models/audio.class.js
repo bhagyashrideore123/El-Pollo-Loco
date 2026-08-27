@@ -1,4 +1,4 @@
-class Globals extends World{
+class Audio{
     // static Sound = new Audio('../audio/walk.mp3');
 
     // static playWalk()

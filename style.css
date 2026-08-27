@@ -29,6 +29,7 @@
     scroll-behavior: smooth;
     position: relative;
     box-sizing: border-box;
+    font-family:'Handjet';
 }
 
 body{
@@ -41,7 +42,13 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    font-family:'Handjet';
+
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 canvas{
@@ -54,12 +61,60 @@ h1{
     font-size: 8rem;
 }
 
+h2{
+    font-size: 4rem;
+}
+
+.PlayDetails{
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+    font-size: 2rem;
+}
+
+.startScreenImg{
+    width: 720px;
+    height: 480px;
+    object-fit: cover;
+    border: 10px solid white;
+    padding: 10px;
+}
+
+.start_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}
+
+button{
+    border: none;
+    background: none;
+    font-size: 50px;
+    color: white;
+    padding: 10px;
+
+}
+
+button:hover{
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.269);
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
 /* media query for smartphones */
 @media only screen and (max-width:720){
     canvas{
         width: 100%;
     }   
 }
+
 /* media query for smartphones */
 @media only screen and (max-height:480){
     canvas{

@@ -15,7 +15,7 @@ class MiniChicken extends Movable {
         this.loadImages(this.chickenImages.walk);
         this.x = 200 + Math.random() * 1500; //chickens start at 200px and then next cheickens will come after that.
         this.speed = this.speed + Math.random() * 0.25;   
-       // this.getRealFrame();    
+        this.getRealFrame();    
         this.animate();
     }
 

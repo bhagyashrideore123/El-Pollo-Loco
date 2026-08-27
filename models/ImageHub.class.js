@@ -74,6 +74,9 @@ class ImageHub extends World {
         ],
     };
 
+    static COIN = ["img/8_coin/coin_1.png"];
+    static BOTTOL = ["img/6_salsa_bottle/2_salsa_bottle_on_ground.png"]
+
     static BOSS = {
         walk: [
             "img/4_enemie_boss_chicken/1_walk/G1.png",

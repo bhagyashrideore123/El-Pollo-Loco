@@ -8,6 +8,9 @@ class World {
     heathbar = new Health_Statusbar();
     coinsbar = new Coins_Statusbar();
     bottlesbar = new Bottle_Statusbar();
+    coins_collectable = new Collectable_coins();
+    bottols_collectable = new Collectable_bottols();
+
     throwable_Object = [];
 
     constructor(_Canvas, _keyboard) {
@@ -60,6 +63,9 @@ class World {
         this.addToMap(this.coinsbar);
         this.addToMap(this.bottlesbar);
         this.contex.translate(this.camera_x, 0); //Forward
+        this.addToMap(this.bottols_collectable);
+        this.addToMap(this.coins_collectable);
+
     }
     flipImage(mo) {
         this.contex.save();
@@ -96,10 +102,11 @@ class World {
                 this.character.hit();
                 this.heathbar.setPercentage(this.character.energy);
                 if (this.character.energy === 0) {
-                    //show dead animation
+                    
                 }
             } else {
             }
         });
+        
     }
 }

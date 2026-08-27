@@ -9,5 +9,6 @@ class Level {
         this.enemies = _enemies;
         this.clouds =  _clouds;
         this.backgrounds =  _backgrounds;
+
     }
 }

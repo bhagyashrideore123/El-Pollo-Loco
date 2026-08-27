@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El-Pollo-Loco</title>
     <link rel="stylesheet" href="style.css">
     <script src="./models/drawable.class.js"></script>
-    <script src="./models/movable.class.js" ></script>
-    <script src="./models/character.class.js" ></script>
-    <script src="./models/chicken.class.js" ></script>
-    <script src="./models/MiniChicken.class.js" ></script>   
-    <script src="./models/health-statusbar.class.js"></script> 
-    <script src="./models/coins_statusbar.class.js"></script> 
-    <script src="./models/bottles_statusbar.class.js"></script> 
-    <script src="./models/world.class.js" ></script>
-    <script src="./models/clouds.class.js" ></script>
-    <script src="./models/background.class.js" ></script>
-    <script src="./models/ImageHub.class.js" ></script>
-    <script src="./models/globals.class.js" ></script>
+    <script src="./models/movable.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/MiniChicken.class.js"></script>
+    <script src="./models/health-statusbar.class.js"></script>
+    <script src="./models/coins_statusbar.class.js"></script>
+    <script src="./models/bottles_statusbar.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/clouds.class.js"></script>
+    <script src="./models/background.class.js"></script>
+    <script src="./models/ImageHub.class.js"></script>
+    <script src="./models/audio.class.js"></script>
     <script src="./models/keyboard.class.js"></script>
     <script src="./models/level.class.js"></script>
     <script src="./models/throwable.class.js"></script>
-    <script src="./models/endboss.class.js"></script>   
+    <script src="./models/endboss.class.js"></script>
     <script src="./models/intervalHub.class.js"></script>
+    <script src="./models/collectable_Bottle.class.js"></script>
+    <script src="./models/collectable_coins.class.js"></script>
     <script src="./js/levels/level1.js" defer></script>
-    <script src="./js/game.js" defer></script>    
+    <script src="./js/game.js" defer></script>
 </head>
+
 <body onload="init()">
+<div class="wrapper">
     <h1>El POLLO LOCO</h1>
-  <!-- <button onclick="resizeCanvas()">fullscreen</button> -->
-    <canvas id="canvas" width="720" height="480">
-    </canvas>
+    <h2>Level 1</h2>
+    <div class="PlayDetails">      
+            <h3>Arrow Left/Right = Walk</h3>        
+            <h3>Space = Jump</h3>        
+            <h3>Press D = Throw Bottles</h3>
+        </div>
+    </div>
+    <div id="startScreen" class="start_container">
+        <img class="startScreenImg" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="start_screen_of_game">
+        <button onclick="startGame()">Start >></button>
+    </div>
+    <canvas id="canvas" width="720" height="480"> </canvas>
+</div>
 </body>
 </html>
