@@ -23,10 +23,10 @@ class Movable extends Drawable {
     }
 
     moveRight() {
-        if(this instanceof Character)
-        {
+        // if(this instanceof Character)
+        // {
             
-        }
+        // }
         this.x += this.speed;
     }
 
@@ -50,7 +50,7 @@ class Movable extends Drawable {
         }, 1000 / 25);
     }
 
-    isAboveGround() {
+    isAboveGround(){
         if(this instanceof Throwable) //trwable obj should should always fall
         {
             return true;

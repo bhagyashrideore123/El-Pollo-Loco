@@ -1,18 +1,13 @@
-class Collectable_coins extends Drawable {
+class Collectable_coins extends Movable {
 
-    constructor()
+    constructor(_x,_y)
     {
         super();
-        this.x = 400;
-        this.y = 250;
+        this.x = _x;
+        this.y = _y;
         this.height = 100;
         this.width = 80;
-        this.loadImage(ImageHub.COIN);
-        //this.getrealframe();
-    }
-
-    collect_coins()
-    {
-
+        this.loadImage(ImageHub.COIN); 
+        this.getRealFrame();  
     }
 }

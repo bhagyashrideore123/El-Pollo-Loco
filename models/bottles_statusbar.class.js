@@ -1,4 +1,4 @@
- class Bottle_Statusbar extends Drawable {
+class Bottle_Statusbar extends Drawable {
     x = 110;
     y = 80; 
 
@@ -7,7 +7,7 @@
     constructor() {
         super();  
         this.loadImages(this.Statusbar_Bottles);
-        this.setPercentage(100);     
+        this.setPercentage(0);     
     }
 
     setPercentage(_percentage) {

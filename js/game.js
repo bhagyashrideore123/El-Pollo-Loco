@@ -5,10 +5,11 @@ let canvas = document.getElementById("canvas");
 
 function init() {
 
-    canvas.style.display = 'none';
-    // Keyboard.keyboard_eventListener();
-    // canvas = document.getElementById("canvas");
-    // world = new World(canvas,keyboard);    
+    canvas.style.display = 'block';
+    startGameScreen.style.display = 'none';
+    Keyboard.keyboard_eventListener();
+    canvas = document.getElementById("canvas");
+    world = new World(canvas,keyboard);    
 }
 
 function startGame()

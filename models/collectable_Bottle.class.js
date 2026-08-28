@@ -1,12 +1,12 @@
-class Collectable_bottols extends Drawable {
-    constructor()
+class Collectable_bottols extends Movable {
+    constructor(_x,_y)
     {
         super();
-        this.x = 200;
-        this.y = 350;
+        this.x = _x;
+        this.y = _y;
         this.height = 100;
         this.width = 80;
-        this.loadImage(ImageHub.BOTTOL);
-        
+        this.loadImage(ImageHub.BOTTOL);    
+        this.getRealFrame();
     }
 }

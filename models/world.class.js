@@ -8,10 +8,12 @@ class World {
     heathbar = new Health_Statusbar();
     coinsbar = new Coins_Statusbar();
     bottlesbar = new Bottle_Statusbar();
-    coins_collectable = new Collectable_coins();
-    bottols_collectable = new Collectable_bottols();
-
     throwable_Object = [];
+    coins_to_collect = this.level.coins_collectable;
+    bottols_to_collect = this.level.bottols_collectable;
+    collect_coins_array = [];
+    collect_bottles_array = [];
+
 
     constructor(_Canvas, _keyboard) {
         this.canvas = _Canvas;
@@ -63,8 +65,8 @@ class World {
         this.addToMap(this.coinsbar);
         this.addToMap(this.bottlesbar);
         this.contex.translate(this.camera_x, 0); //Forward
-        this.addToMap(this.bottols_collectable);
-        this.addToMap(this.coins_collectable);
+        this.objectsToMap(this.coins_to_collect);
+        this.objectsToMap(this.bottols_to_collect);
 
     }
     flipImage(mo) {
@@ -97,6 +99,13 @@ class World {
         }
     }
     checkCollision() {
+        this.checkEnemyCollision();
+        this.checkCoinCollision();
+        this.checkBottolCollision();
+    }
+
+    checkEnemyCollision()
+    {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -107,6 +116,25 @@ class World {
             } else {
             }
         });
-        
     }
+    checkCoinCollision()
+    {
+        this.level.coins_collectable.forEach((coin,index)=>{
+            if (this.character.isColliding(coin)) {
+                this.collect_coins_array.push(coin);
+                this.coins_to_collect.splice(index,1);
+            } 
+        });
+    }
+
+    checkBottolCollision(){
+        this.level.bottols_collectable.forEach((bottle,index)=>{
+            console.log("check bottol")
+                if (this.character.isColliding(bottle)) {
+                    this.collect_bottles_array.push(bottle);
+                    this.bottols_to_collect.splice(index,1);
+                    console.log(this.bottols_to_collect,this.collect_bottles_array);
+                } 
+            });
+        }
 }

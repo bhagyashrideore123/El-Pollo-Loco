@@ -6,7 +6,7 @@ class Coins_Statusbar extends Drawable {
     constructor() {
         super();  
         this.loadImages(this.Statusbar_Coins);
-        this.setPercentage(100);     
+        this.setPercentage(0);     
     } 
     setPercentage(_percentage) {
         this.percentage = _percentage; //=> 0.....5

@@ -24,7 +24,15 @@ class Drawable{
 
     draw(contex)
     {
+        try{
         contex.drawImage(this.img, this.x, this.y, this.width, this.height); //here we give movable object to canvas.
+
+        }catch(e)
+        {
+            console.log("error in image loading:",e);
+            console.log("error in image loading:",this.img.src);
+            
+        }
     }
 
     drawFrame(contex) {
@@ -43,5 +51,4 @@ class Drawable{
         }
     }
 
-  
 }
