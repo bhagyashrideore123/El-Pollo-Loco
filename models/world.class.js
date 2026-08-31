@@ -21,7 +21,14 @@ class World {
         this.keyboard = _keyboard;
         this.draw();
         this.setWorld();
-        this.run();
+        IntervalHub.startInterval(this.run, 1000/10);
+    }
+    run=()=> {
+        setInterval(() => {
+            this.checkEnemyCollision();
+            this.checkCollision();
+            this.checkThrowObject();
+        }, 100);//chnages from 200 to 100 so taht collision check happens more often.
     }
 
     //we have to execute this method only if our img is loaded.hence we call draw again inside it. (requestAnimationFrame)
@@ -83,12 +90,6 @@ class World {
     setWorld() {
         this.character.world = this; //we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
     }
-    run() {
-        setInterval(() => {
-            this.checkCollision();
-            this.checkThrowObject();
-        }, 200);
-    }
 
     checkThrowObject()
     {
@@ -99,7 +100,6 @@ class World {
         }
     }
     checkCollision() {
-        this.checkEnemyCollision();
         this.checkCoinCollision();
         this.checkBottolCollision();
     }
@@ -110,11 +110,10 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.heathbar.setPercentage(this.character.energy);
-                if (this.character.energy === 0) {
-                    
+                if (this.character.energy === 0) { 
+                    this.character.isDead();                   
                 }
-            } else {
-            }
+            } 
         });
     }
     checkCoinCollision()
@@ -123,17 +122,17 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.collect_coins_array.push(coin);
                 this.coins_to_collect.splice(index,1);
+                this.coinsbar.setPercentage(this.collect_coins_array.length / this.level.coins_collectable.length*100);        
             } 
         });
     }
 
     checkBottolCollision(){
         this.level.bottols_collectable.forEach((bottle,index)=>{
-            console.log("check bottol")
                 if (this.character.isColliding(bottle)) {
                     this.collect_bottles_array.push(bottle);
                     this.bottols_to_collect.splice(index,1);
-                    console.log(this.bottols_to_collect,this.collect_bottles_array);
+                    this.bottlesbar.setPercentage(this.collect_bottles_array.length / this.level.bottols_collectable.length*100);          
                 } 
             });
         }

@@ -3,11 +3,12 @@ class Coins_Statusbar extends Drawable {
     y = 40; 
 
     Statusbar_Coins = ImageHub.STATUSBAR.coins;  
+
     constructor() {
-        super();  
-        this.loadImages(this.Statusbar_Coins);
+        super().loadImages(this.Statusbar_Coins);
         this.setPercentage(0);     
     } 
+    
     setPercentage(_percentage) {
         this.percentage = _percentage; //=> 0.....5
         let path =  this.Statusbar_Coins[this.resolveImageIndex()];

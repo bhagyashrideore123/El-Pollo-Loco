@@ -10,7 +10,7 @@ class Endboss extends Movable {
         this.loadImages(this.endboss_Images.walk);
         this.loadImages(this.endboss_Images.angry);
         this.x = 2500;
-        this.getRealFrame();
+        //this.getRealFrame();
         this.animate();
     }
 

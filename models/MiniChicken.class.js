@@ -13,19 +13,19 @@ class MiniChicken extends Movable {
     constructor() {
         super().loadImage(this.chickenImages.ideal);
         this.loadImages(this.chickenImages.walk);
-        this.x = 200 + Math.random() * 1500; //chickens start at 200px and then next cheickens will come after that.
+        this.x = 700 + Math.random() * 1500; //chickens start at 200px and then next cheickens will come after that.
         this.speed = this.speed + Math.random() * 0.25;   
         this.getRealFrame();    
-        this.animate();
+        IntervalHub.startInterval(this.animate,1000/60);
+        IntervalHub.startInterval(this.animateMiniChicken,1000/10);
     }
 
-    animate() {
-        setInterval(() => {
+    animate=() =>{
             this.moveLeft();
-        }, 1000 / 60); //most of the games run animation of 60 frames per second.
-
-        setInterval(() => {
-            this.playAnimation(this.chickenImages.walk);
-        }, 500);
     }
+
+    animateMiniChicken =()=>{
+        this.playAnimation(this.chickenImages.walk);
+    }  
+
 }

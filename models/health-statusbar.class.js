@@ -4,8 +4,7 @@ class Health_Statusbar extends Drawable {
     Statusbar_Health = ImageHub.STATUSBAR.health;
 
     constructor() {
-        super();  
-        this.loadImages(this.Statusbar_Health);
+        super().loadImages(this.Statusbar_Health);
         this.setPercentage(100);     
     }
     setPercentage(_percentage) {

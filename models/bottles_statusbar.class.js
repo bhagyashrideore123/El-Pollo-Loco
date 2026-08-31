@@ -3,10 +3,10 @@ class Bottle_Statusbar extends Drawable {
     y = 80; 
 
     Statusbar_Bottles = ImageHub.STATUSBAR.bottles;
+    
 
     constructor() {
-        super();  
-        this.loadImages(this.Statusbar_Bottles);
+        super().loadImages(this.Statusbar_Bottles);
         this.setPercentage(0);     
     }
 

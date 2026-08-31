@@ -57,7 +57,7 @@ class ImageHub extends World {
             "img/2_character_pepe/3_jump/J-39.png",
         ],
 
-        ideal: ["img/2_character_pepe/2_walk/W-21.png"],
+        ideal: ["img/2_character_pepe/1_idle/idle/I-10.png"],
         dead: [
             "img/2_character_pepe/5_dead/D-51.png",
             "img/2_character_pepe/5_dead/D-52.png",
@@ -150,4 +150,10 @@ class ImageHub extends World {
             "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
         ],
     };
+
+    static ENDGAME = {
+        youLose:["img/You won, you lost/You lost.png"],
+        youWin:["img/You won, you lost/You won A.png"],
+
+    }
 }

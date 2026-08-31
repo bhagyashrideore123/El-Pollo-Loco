@@ -6,9 +6,9 @@ class Movable extends Drawable {
     energy = 100;
     lastHit = 0;
     offset = { 
-        top: 100, //we set smallest border for each moving object here with the help of offset
-        right: 10,
-        bottom: 10,
+        top: 120, //we set smallest border for each moving object here with the help of offset
+        right: 30,
+        bottom: 30,
         left: 30
     };
     rX; //real X
@@ -19,7 +19,6 @@ class Movable extends Drawable {
     constructor()
     {
         super();
-        //this.getRealFrame();
     }
 
     moveRight() {
@@ -41,13 +40,11 @@ class Movable extends Drawable {
         this.currentImage++;
     }
 
-    applyGravity() {
-        setInterval(() => {
+    applyGravity=() =>{        
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25);
     }
 
     isAboveGround(){
@@ -86,11 +83,13 @@ class Movable extends Drawable {
             this.lastHit = new Date().getTime();
         }
     }
+    
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //diffrence in miliseconds
         timePassed = timePassed / 1000; //difference in seconds
         return timePassed < 0.8;
     }
+
     isDead() {
         return this.energy == 0;
     }

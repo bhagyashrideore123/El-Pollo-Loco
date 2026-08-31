@@ -7,6 +7,11 @@ class Drawable{
     imageCache = {};
     currentImage = 0;
     percentage = 100;
+
+    //variables for statusbars
+   
+    Statusbar_Coins = ImageHub.STATUSBAR.coins;  
+    Statusbar_Health = ImageHub.STATUSBAR.health;
     
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
@@ -36,7 +41,9 @@ class Drawable{
     }
 
     drawFrame(contex) {
-        if ( this instanceof Character ||  this instanceof Chicken ) //draw rectangale frame only for character and chicken instances
+        if ( this instanceof Character ||  this instanceof Chicken||
+        this instanceof Collectable_bottols || this instanceof MiniChicken
+        || this instanceof Collectable_coins ) //draw rectangale frame only for character and chicken instances
         {
             contex.beginPath();
             contex.lineWidth = "3";
@@ -50,5 +57,27 @@ class Drawable{
             contex.stroke();
         }
     }
+
+    // setPercentage(_percentage, _IMAGE) {
+    //     this.percentage = _percentage; //=> 0.....5
+    //     let path =  _IMAGE[this.resolveImageIndex()];
+    //     this.img = this.imageCache[path];
+    // }
+
+    // resolveImageIndex() {
+    //     if (this.percentage == 100) {
+    //         return 5;
+    //     } else if (this.percentage > 80) {
+    //         return 4;
+    //     } else if (this.percentage > 60) {
+    //         return 3;
+    //     } else if (this.percentage > 40) {
+    //         return 2;
+    //     } else if (this.percentage > 20) {
+    //         return 1;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
 
 }

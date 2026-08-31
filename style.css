@@ -82,7 +82,13 @@ h2{
     border: 10px solid white;
     padding: 10px;
 }
-
+.EndScreenImg{
+    width: 720px;
+    height: 480px;
+    object-fit: cover;
+    border: 10px solid white;
+    padding: 10px;
+}
 .start_container{
     display: flex;
     justify-content: center;
