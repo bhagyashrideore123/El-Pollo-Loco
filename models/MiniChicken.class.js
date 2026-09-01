@@ -2,6 +2,7 @@ class MiniChicken extends Movable {
     y = 360;
     height = 80;
     width = 80;
+    type = "chicken";
     chickenImages = ImageHub.MINICHICKEN;
     speed = 0.10; // we make speed here different so taht it will look dynamic
     offset = {

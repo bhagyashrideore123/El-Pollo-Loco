@@ -15,6 +15,7 @@
     <script src="./models/health-statusbar.class.js"></script>
     <script src="./models/coins_statusbar.class.js"></script>
     <script src="./models/bottles_statusbar.class.js"></script>
+    <script src="./models/endbossHealthBar.class.js"></script>
     <script src="./models/world.class.js"></script>
     <script src="./models/clouds.class.js"></script>
     <script src="./models/background.class.js"></script>
@@ -42,7 +43,11 @@
     <div id="EndScreen" class="start_container">
         <img class="EndScreenImg" src="img/5_background/first_half_background.png" alt="end_screen_of_game">
     </div> -->
-    <canvas id="canvas" width="720" height="480"> </canvas>
+    <div id="fullscreen">
+        <img class="fullscreenBtn" onclick="fullscreenStart()" src="./img/logos/fullscreen.svg" alt="fullscreen_symbol">
+        <canvas id="canvas" width="720" height="480"> </canvas>
+    </div>
+
     <div class="PlayDetails">
         <h3>Arrow Left/Right = Walk</h3>
         <h3>Space = Jump</h3>

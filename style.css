@@ -53,7 +53,7 @@ body{
 
 canvas{
     background-color: black;
-    border: 10px dashed white;
+    /* border: 5px dashed white; */
     display: block;
 }
 
@@ -113,6 +113,15 @@ button:hover{
     padding: 10px;
 
 }
+
+.fullscreenBtn{
+    cursor: pointer; 
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    right: 0;
+}
+
 
 /* media query for smartphones */
 @media only screen and (max-width:720){

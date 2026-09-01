@@ -3,23 +3,27 @@ class Throwable extends Movable{
     width = 50;
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
-
+    offset = {
+            top: 50, //we set smallest border for each moving object here with the help of offset
+            right: 10,
+            bottom: 60,
+            left: 20,
+        };
+        
     constructor(_x,_y)
     {
         super().loadImage(this.BottleImage);
         this.loadImages(this.BottoleRotation);
         this.x = _x;
         this.y = _y;
-        this.throw();
+        this.speedY = 30;       
+        IntervalHub.startInterval(this.throw,1000/25); 
+        this.getRealFrame();
     }
     
-    throw()
-    {
-        this.speedY = 30;
-        this.applyGravity();
-        setInterval(() => {
+    throw =()=> {   
+            this.applyGravity();    
             this.x += 10;
             this.playAnimation(this.BottoleRotation);
-        }, 25);
     }
 }

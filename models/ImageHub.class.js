@@ -131,6 +131,14 @@ class ImageHub extends World {
             "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
             "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
         ],
+        endboss:[
+            "img/7_statusbars/2_statusbar_endboss/green/green0.png",
+            "img/7_statusbars/2_statusbar_endboss/green/green20.png",
+            "img/7_statusbars/2_statusbar_endboss/green/green40.png",
+            "img/7_statusbars/2_statusbar_endboss/green/green60.png",
+            "img/7_statusbars/2_statusbar_endboss/green/green80.png",
+            "img/7_statusbars/2_statusbar_endboss/green/green100.png"
+        ]
     };
 
     static SALSABOTTOL = {
@@ -153,7 +161,7 @@ class ImageHub extends World {
 
     static ENDGAME = {
         youLose:["img/You won, you lost/You lost.png"],
-        youWin:["img/You won, you lost/You won A.png"],
+        youWin:["img/You won, you lost/You won A.png"]
 
     }
 }

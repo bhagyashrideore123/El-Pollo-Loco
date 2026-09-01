@@ -4,28 +4,38 @@ class Endboss extends Movable {
     width = 250;
     y = 100;
     firstContact = false;
+    type = "endboss"; 
+    bossenergy;
+    offset = { 
+        top: 80, //we set smallest border for each moving object here with the help of offset
+        right: 20,
+        bottom: 30,
+        left: 20
+    };
 
     constructor() {
         super().loadImage(this.endboss_Images.walk[0]);
         this.loadImages(this.endboss_Images.walk);
         this.loadImages(this.endboss_Images.angry);
-        this.x = 2500;
-        //this.getRealFrame();
-        this.animate();
+        this.x = 3000;
+        IntervalHub.startInterval(this.animate,1000/60);
+        IntervalHub.startInterval(this.animateEndBoss,1000/8);
+        this.getRealFrame();
     }
+    animate = () => {
+        this.moveLeft();
+    };
+    animateEndBoss = () => {        
+        this.playAnimation(this.endboss_Images.walk);
+    };
 
-    animate() {
-       // let i = 0;
-        setInterval(() => {
-            // if (i < 4) {
-                this.playAnimation(this.endboss_Images.walk);
-            // } else {
-                this.playAnimation(this.endboss_Images.angry);
-            // }
-            // i++;
-            // if (world.character.x > 2500 && !this.firstContact)
-            //     this.firstContact = true;
-            // i = 0;
-        }, 200);
+    hit()
+    {
+         this.bossenergy -= 5; //when they meet reduce energy of character
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
     }
 }

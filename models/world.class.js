@@ -8,12 +8,12 @@ class World {
     heathbar = new Health_Statusbar();
     coinsbar = new Coins_Statusbar();
     bottlesbar = new Bottle_Statusbar();
+    endbossBar = new EndbossHealth_Statusbar();
     throwable_Object = [];
     coins_to_collect = this.level.coins_collectable;
     bottols_to_collect = this.level.bottols_collectable;
     collect_coins_array = [];
     collect_bottles_array = [];
-
 
     constructor(_Canvas, _keyboard) {
         this.canvas = _Canvas;
@@ -21,15 +21,13 @@ class World {
         this.keyboard = _keyboard;
         this.draw();
         this.setWorld();
-        IntervalHub.startInterval(this.run, 1000/10);
+        IntervalHub.startInterval(this.run, 1000 / 10); //chnages from 200 to 100 so taht collision check happens more often.
     }
-    run=()=> {
-        setInterval(() => {
-            this.checkEnemyCollision();
-            this.checkCollision();
-            this.checkThrowObject();
-        }, 100);//chnages from 200 to 100 so taht collision check happens more often.
-    }
+    run = () => {
+        this.checkEnemyCollision();
+        this.checkCollision();
+        this.checkThrowObject();
+    };
 
     //we have to execute this method only if our img is loaded.hence we call draw again inside it. (requestAnimationFrame)
     draw() {
@@ -71,11 +69,12 @@ class World {
         this.addToMap(this.heathbar);
         this.addToMap(this.coinsbar);
         this.addToMap(this.bottlesbar);
+        this.addToMap(this.endbossBar);
         this.contex.translate(this.camera_x, 0); //Forward
         this.objectsToMap(this.coins_to_collect);
         this.objectsToMap(this.bottols_to_collect);
-
     }
+
     flipImage(mo) {
         this.contex.save();
         this.contex.translate(mo.width, 0);
@@ -87,53 +86,92 @@ class World {
         mo.x = mo.x * -1;
         this.contex.restore();
     }
+
     setWorld() {
         this.character.world = this; //we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
     }
 
-    checkThrowObject()
-    {
-        if(Keyboard.D)
-        {
-            let bottle = new Throwable(this.character.x+100,this.character.y+100);
+    checkThrowObject() {
+        if (Keyboard.D) {
+            let bottle = new Throwable(
+                this.character.x + 100,
+                this.character.y + 100,
+            );
             this.throwable_Object.push(bottle);
+            this.checkEndBossCollision();
         }
     }
+
+    checkEndBossCollision() {
+        if (this.throwable_Object.length) {
+            // this.throwable_Object.forEach(bottle => {
+            //     if(bottle.isColliding(this.level.endboss))
+            //     {
+            //         this.level.enemies.hit();
+            //         console.log("endboss colliding")
+            //     }
+            // });
+        }
+    }
+
     checkCollision() {
         this.checkCoinCollision();
         this.checkBottolCollision();
     }
 
-    checkEnemyCollision()
-    {
+    checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.heathbar.setPercentage(this.character.energy);
-                if (this.character.energy === 0) { 
-                    this.character.isDead();                   
+                let Images = ImageHub.STATUSBAR.health;
+                this.heathbar.setPercentage(this.character.energy, Images);
+
+                if (this.character.energy === 0) {
+                    this.character.isDead();
                 }
-            } 
-        });
-    }
-    checkCoinCollision()
-    {
-        this.level.coins_collectable.forEach((coin,index)=>{
-            if (this.character.isColliding(coin)) {
-                this.collect_coins_array.push(coin);
-                this.coins_to_collect.splice(index,1);
-                this.coinsbar.setPercentage(this.collect_coins_array.length / this.level.coins_collectable.length*100);        
-            } 
+
+                // if(enemy.type === "chicken")
+                // {
+                //     console.log("consition true chicken")
+                // }
+
+                // if(enemy.type === "endboss")
+                // {
+                //     console.log("consition true endboss")
+                // }
+            }
         });
     }
 
-    checkBottolCollision(){
-        this.level.bottols_collectable.forEach((bottle,index)=>{
-                if (this.character.isColliding(bottle)) {
-                    this.collect_bottles_array.push(bottle);
-                    this.bottols_to_collect.splice(index,1);
-                    this.bottlesbar.setPercentage(this.collect_bottles_array.length / this.level.bottols_collectable.length*100);          
-                } 
-            });
-        }
+    checkCoinCollision() {
+        this.level.coins_collectable.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.collect_coins_array.push(coin);
+                this.coins_to_collect.splice(index, 1);
+                let Images = ImageHub.STATUSBAR.coins;
+                this.coinsbar.setPercentage(
+                    (this.collect_coins_array.length /
+                        this.level.coins_collectable.length) *
+                        100,
+                    Images,
+                );
+            }
+        });
+    }
+
+    checkBottolCollision() {
+        this.level.bottols_collectable.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.collect_bottles_array.push(bottle);
+                this.bottols_to_collect.splice(index, 1);
+                let Images = ImageHub.STATUSBAR.bottles;
+                this.bottlesbar.setPercentage(
+                    (this.collect_bottles_array.length /
+                        this.level.bottols_collectable.length) *
+                        100,
+                    Images,
+                );
+            }
+        });
+    }
 }
