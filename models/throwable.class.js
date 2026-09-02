@@ -4,7 +4,7 @@ class Throwable extends Movable{
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
     offset = {
-            top: 50, //we set smallest border for each moving object here with the help of offset
+            top: 50, 
             right: 10,
             bottom: 60,
             left: 20,
@@ -16,7 +16,7 @@ class Throwable extends Movable{
         this.loadImages(this.BottoleRotation);
         this.x = _x;
         this.y = _y;
-        this.speedY = 30;       
+        this.speedY = 20;       
         IntervalHub.startInterval(this.throw,1000/25); 
         this.getRealFrame();
     }

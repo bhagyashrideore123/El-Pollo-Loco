@@ -20,7 +20,7 @@ class Endboss extends Movable {
         this.x = 3000;
         IntervalHub.startInterval(this.animate,1000/60);
         IntervalHub.startInterval(this.animateEndBoss,1000/8);
-        this.getRealFrame();
+        this.getRealFrame;
     }
     animate = () => {
         this.moveLeft();

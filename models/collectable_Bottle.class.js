@@ -12,7 +12,7 @@ class Collectable_bottols extends Movable {
         this.y = _y;
         this.height = 100;
         this.width = 80;   
-        this.getRealFrame();
+        //this.getRealFrame();
     }
 
     setPercentage(_percentage) {

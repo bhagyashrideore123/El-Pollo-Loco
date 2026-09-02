@@ -20,7 +20,7 @@ class Character extends Movable {
         IntervalHub.startInterval(this.applyGravity,1000/25);
         IntervalHub.startInterval(this.animate, 1000 / 60); //60 frames per second
         IntervalHub.startInterval(this.animateCharacter, 1000 / 10);
-        this.getRealFrame();
+        this.getRealFrame;
     }
 
     animate=()=> {
@@ -47,8 +47,12 @@ class Character extends Movable {
         //OUTPUT: i  = 0,1,2,3,4,5,0,1,2,3......
         if (this.isDead()) {
             this.playAnimation(this.pepeDeadImages);
-            //globals.GAMEOVER = true;
-            //show game over here............
+            this.gameOverYouLoose = true;
+            document.getElementById("EndScreen").style.display = "block";
+            document.getElementById("EndScreen").innerHTML = youLost();
+            document.getElementById("canvas").style.display = "none";
+            document.getElementById("startScreen").style.display = "none";
+
         } else if (this.isHurt()) {
             this.playAnimation(this.pepeHitImages);
         } else if (this.isAboveGround()) {
@@ -57,6 +61,7 @@ class Character extends Movable {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
                 this.playAnimation(this.pepeWalkImages); //when on graound show walk img
             }
+            
         }
     }
 

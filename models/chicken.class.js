@@ -18,7 +18,7 @@ class Chicken extends Movable {
         this.speed = this.speed + Math.random() * 0.15;
         IntervalHub.startInterval(this.animate, 1000 / 60); 
         IntervalHub.startInterval(this.animateChicken, 1000 / 5); 
-        this.getRealFrame();
+        this.getRealFrame;
     }
 
     animate = () => {
@@ -27,4 +27,5 @@ class Chicken extends Movable {
     animateChicken = () => {        
         this.playAnimation(this.chickenImages.walk);
     };
+
 }

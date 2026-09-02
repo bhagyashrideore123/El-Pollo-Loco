@@ -22,10 +22,6 @@ class Movable extends Drawable {
     }
 
     moveRight() {
-        // if(this instanceof Character)
-        // {
-            
-        // }
         this.x += this.speed;
     }
 

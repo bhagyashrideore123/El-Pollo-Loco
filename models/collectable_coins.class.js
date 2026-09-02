@@ -13,7 +13,7 @@ class Collectable_coins extends Movable {
         this.height = 100;
         this.width = 80;
         this.loadImage(ImageHub.COIN); 
-        this.getRealFrame();  
+        //this.getRealFrame();  
     }
     setPercentage(_percentage) {
         this.percentage = _percentage; //=> 0.....5

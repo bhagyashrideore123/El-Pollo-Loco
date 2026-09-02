@@ -7,8 +7,8 @@ let canvas = document.getElementById("canvas");
 function init() {
     // endGame();
     canvas.style.display = 'block';
-    // startGameScreen.style.display = 'none';
-    // endGameScreen.style.display = 'none';
+    startGameScreen.style.display = 'none';
+    endGameScreen.style.display = 'none';
     Keyboard.keyboard_eventListener();
     canvas = document.getElementById("canvas");
     world = new World(canvas);    
