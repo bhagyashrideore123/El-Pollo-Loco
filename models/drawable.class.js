@@ -7,6 +7,7 @@ class Drawable{
     imageCache = {};
     currentImage = 0;
     percentage = 100;
+    isFalling = false;
     
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag

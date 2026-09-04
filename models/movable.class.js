@@ -72,7 +72,7 @@ class Movable extends Drawable {
     }
 
     hit() {
-        this.energy -= 5; //when they meet reduce energy of character
+        this.energy -= 2; //when they meet reduce energy of character
         if (this.energy < 0) {
             this.energy = 0;
         } else {

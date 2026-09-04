@@ -17,13 +17,13 @@ class Character extends Movable {
         this.loadImages(this.pepeDeadImages);
         this.loadImages(this.pepeHitImages);
 
-        IntervalHub.startInterval(this.applyGravity,1000/25);
+        IntervalHub.startInterval(this.applyGravity, 1000 / 25);
         IntervalHub.startInterval(this.animate, 1000 / 60); //60 frames per second
         IntervalHub.startInterval(this.animateCharacter, 1000 / 10);
         this.getRealFrame;
     }
 
-    animate=()=> {
+    animate = () => {
         if (Keyboard.ArrowRight && this.x < this.world.level.levelEnd_x) {
             this.moveRight();
             this.otherDirection = false;
@@ -36,9 +36,9 @@ class Character extends Movable {
             this.jump();
         }
         this.world.camera_x = -this.x + 100;
-    }
+    };
 
-    animateCharacter=()=> {
+    animateCharacter = () => {
         //let i = 0 % 6; 0, rest 0
         //let i = 1 % 6; 0, rest 1
         // ...
@@ -48,11 +48,10 @@ class Character extends Movable {
         if (this.isDead()) {
             this.playAnimation(this.pepeDeadImages);
             this.gameOverYouLoose = true;
-            document.getElementById("EndScreen").style.display = "block";
+            document.getElementById("EndScreen").style.display = "flex";
             document.getElementById("EndScreen").innerHTML = youLost();
             document.getElementById("canvas").style.display = "none";
             document.getElementById("startScreen").style.display = "none";
-
         } else if (this.isHurt()) {
             this.playAnimation(this.pepeHitImages);
         } else if (this.isAboveGround()) {
@@ -61,11 +60,13 @@ class Character extends Movable {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
                 this.playAnimation(this.pepeWalkImages); //when on graound show walk img
             }
-            
         }
-    }
+    };
 
     jump() {
+        if (this.speedY < 0) {
+            this.isFalling = true;
+        }
         this.speedY = 30;
     }
 }

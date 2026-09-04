@@ -4,6 +4,7 @@ class Endboss extends Movable {
     width = 250;
     y = 100;
     firstContact = false;
+    isDead = true;
     type = "endboss"; 
     bossenergy;
     offset = { 
@@ -29,13 +30,4 @@ class Endboss extends Movable {
         this.playAnimation(this.endboss_Images.walk);
     };
 
-    hit()
-    {
-         this.bossenergy -= 5; //when they meet reduce energy of character
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
 }

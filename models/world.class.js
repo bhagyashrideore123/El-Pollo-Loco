@@ -23,7 +23,7 @@ class World {
         this.keyboard = _keyboard;
         this.draw();
         this.setWorld();
-        IntervalHub.startInterval(this.run, 1000 / 10); //chnages from 200 to 100 so taht collision check happens more often.
+        IntervalHub.startInterval(this.run, 1000 / 60); 
     }
 
     run = () => {
@@ -93,67 +93,74 @@ class World {
         this.character.world = this; //we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
     }
 
-    checkThrowObject() {
-        if(this.collect_bottles_array.length > 0)
-        {
-            if (Keyboard.D) {
-                let bottle = new Throwable(
-                    this.character.x + 100,
-                    this.character.y + 100,
-                );
-                this.throwable_Object.push(bottle);
-                this.checkBottolChickenCollision();
-            }
-        }        
-    }
-
-    checkBottolChickenCollision()
-    {
-        this.collect_bottles_array.forEach(element=>{
-
-        })
-    }
-
-    checkEndBossCollision() {
-        if (this.throwable_Object.length) {
-            this.throwable_Object.forEach(bottle => {
-                
-                this.bottlesbar.setPercentage(this.character.energy, Images);
-                // if(bottle.isColliding(this.level.endboss))
-                // {
-                //     this.level.enemies.hit();
-                //     console.log("endboss colliding")
-                // }
-            });
-        }
-    }
-
     checkCollision() {
         this.checkCoinCollision();
         this.checkBottolCollision();
         this.checkThrowObject();
     }
 
+    checkThrowObject() {
+        if (Keyboard.D) {
+            if (this.collect_bottles_array.length > 0) {
+                let bottle = new Throwable(
+                    this.character.x + 100,
+                    this.character.y + 100,
+                );
+                this.throwable_Object.push(bottle);
+                //update statausbar here..
+                let Images = ImageHub.STATUSBAR.bottles;
+                let collectedBottol = this.collect_bottles_array.length;
+                let totalBottols = this.level.bottols_collectable.length;
+                this.updateStatusBars(
+                    collectedBottol,
+                    totalBottols,
+                    Images,
+                    this.bottlesbar,
+                );
+                this.checkThrowableObjectsCollision();
+                this.collect_bottles_array.pop(); //remove one bottol when throw one bottol.
+            
+            }else{
+                console.log("no bottol collected")
+            }
+        }
+    }
+
+    checkThrowableObjectsCollision() {
+        this.collect_bottles_array.forEach((bottol) => {
+            this.level.enemies.forEach((enemy,index) => {
+                if(bottol.isColliding(enemy)){
+                        enemy.isDead = true;
+                        enemy.loadImages(ImageHub.CHICKEN.dead)
+                        setTimeout(() => {
+                            this.level.enemies.splice(index,1);
+                        }, 1000);
+                }
+            
+            });
+        });
+    }
+
+    
+
     checkEnemyCollision() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                let Images = ImageHub.STATUSBAR.health;
-                this.heathbar.setPercentage(this.character.energy, Images);
-
-                // if (this.character.energy === 0) {
-                    
-                // }
-
-                // if(enemy.type === "chicken")
-                // {
-                //     console.log("consition true chicken")
-                // }
-
-                // if(enemy.type === "endboss")
-                // {
-                //     console.log("consition true endboss")
-                // }
+                if (enemy.type === "chicken" && this.character.isFalling) {
+                    enemy.isDead = true;
+                    setTimeout(() => {
+                        this.level.enemies.splice(enemy[index], 1);
+                    }, 1500);
+                } else if ( enemy.type === "chicken" || (enemy.type === "endboss" && !this.character.isAboveGround())) {
+                    {
+                        this.character.hit();
+                        let Images = ImageHub.STATUSBAR.health;
+                        this.heathbar.setPercentage(
+                            this.character.energy,
+                            Images,
+                        );
+                    }
+                }
             }
         });
     }
@@ -164,11 +171,13 @@ class World {
                 this.collect_coins_array.push(coin);
                 this.totalCoins.splice(index, 1);
                 let Images = ImageHub.STATUSBAR.coins;
-                this.coinsbar.setPercentage(
-                    (this.collect_coins_array.length /
-                        this.level.coins_collectable.length) *
-                        100,
+                let collectedCoins = this.collect_coins_array.length;
+                let totalCoins = this.level.coins_collectable.length;
+                this.updateStatusBars(
+                    collectedCoins,
+                    totalCoins,
                     Images,
+                    this.coinsbar,
                 );
             }
         });
@@ -179,14 +188,22 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.collect_bottles_array.push(bottle);
                 this.totalBottols.splice(index, 1);
-                let Images = ImageHub.STATUSBAR.bottles;
-                this.bottlesbar.setPercentage(
-                    (this.collect_bottles_array.length /
-                        this.level.bottols_collectable.length) *
-                        100,
-                    Images,
+                let Image = ImageHub.STATUSBAR.bottles;
+                let collectedBottols = this.collect_bottles_array.length;
+                let totalBottols = this.level.bottols_collectable.length;
+                this.updateStatusBars(
+                    collectedBottols,
+                    totalBottols,
+                    Image,
+                    this.bottlesbar,
                 );
             }
         });
+    }
+
+    updateStatusBars(collectedAssets, totalAssest, IMAGES, statusBar) {
+        let percentage = (collectedAssets / totalAssest) * 100;
+        let Images = IMAGES;
+        statusBar.setPercentage(percentage, Images);
     }
 }
