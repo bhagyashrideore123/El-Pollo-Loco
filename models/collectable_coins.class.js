@@ -1,4 +1,7 @@
-class Collectable_coins extends Movable {
+import { ImageHub } from "./ImageHub.class.js";
+import { Movable } from "./movable.class.js";
+
+export class Collectable_coins extends Movable {
     offset = {
         top: 20, //we set smallest border for each moving object here with the help of offset
         right: 10,

@@ -1,4 +1,7 @@
-class Collectable_bottols extends Movable {
+import { ImageHub } from "./ImageHub.class.js";
+import { Movable } from "./movable.class.js";
+
+export class Collectable_bottols extends Movable {
     offset = { 
         top: 20, //we set smallest border for each moving object here with the help of offset
         right: 30,
@@ -12,7 +15,6 @@ class Collectable_bottols extends Movable {
         this.y = _y;
         this.height = 100;
         this.width = 80;   
-        //this.getRealFrame();
     }
 
     setPercentage(_percentage) {

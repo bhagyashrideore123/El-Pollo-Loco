@@ -1,4 +1,6 @@
-class Keyboard {
+import { AudioHub } from "./audio.class.js";
+
+export class Keyboard {
     static ArrowLeft = false;
     static ArrowRight = false;
     static SPACE = false;

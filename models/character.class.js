@@ -1,14 +1,24 @@
-class Character extends Movable {
+import { AudioHub } from "./audio.class.js";
+import { Globals } from "./globals.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+import { IntervalHub } from "./intervalHub.class.js";
+import { Keyboard } from "./keyboard.class.js";
+import { Movable } from "./movable.class.js";
+
+export class Character extends Movable {
     x = 200;
     y = 180;
     height = 250;
     width = 100;
+    isIdeal = true;
+    Sounds = AudioHub.CHARACTER;
     pepeWalkImages = ImageHub.PEPE.walk;
     pepeJumpImages = ImageHub.PEPE.jump;
     pepeDeadImages = ImageHub.PEPE.dead;
     pepeHitImages = ImageHub.PEPE.hurt;
     world;
     speed = 3.5;
+    isFalling = false;
 
     constructor() {
         super().loadImage(ImageHub.PEPE.ideal);
@@ -20,6 +30,7 @@ class Character extends Movable {
         IntervalHub.startInterval(this.applyGravity, 1000 / 25);
         IntervalHub.startInterval(this.animate, 1000 / 60); //60 frames per second
         IntervalHub.startInterval(this.animateCharacter, 1000 / 10);
+        IntervalHub.startInterval(this.playCharacterSound, 1000 / 60);
         this.getRealFrame;
     }
 
@@ -39,25 +50,26 @@ class Character extends Movable {
     };
 
     animateCharacter = () => {
-        //let i = 0 % 6; 0, rest 0
-        //let i = 1 % 6; 0, rest 1
-        // ...
-        // let i = 5 % 6; 0, rest 5
-        // let i = 6 % 6; 0, rest 0  > here our array will reset and it will start iterating with 0th image again.
-        //OUTPUT: i  = 0,1,2,3,4,5,0,1,2,3......
         if (this.isDead()) {
             this.playAnimation(this.pepeDeadImages);
             this.gameOverYouLoose = true;
-            document.getElementById("EndScreen").style.display = "flex";
-            document.getElementById("EndScreen").innerHTML = youLost();
-            document.getElementById("canvas").style.display = "none";
-            document.getElementById("startScreen").style.display = "none";
+            setTimeout(() => {
+                document.getElementById("EndScreen").style.display = "flex";
+                document.getElementById("EndScreen").innerHTML = youLost();
+                document.getElementById("canvas").style.display = "none";
+                document.getElementById("startScreen").style.display = "none";
+            }, 2000);
         } else if (this.isHurt()) {
             this.playAnimation(this.pepeHitImages);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.pepeJumpImages); //when in air show jump images
         } else {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
+                if(this.x === 2500)
+                {
+                    Globals.endBossAlert = true;//this is to start endboss walking when pepe runs till 2500
+                }
+                Globals.endBossAlert = false;
                 this.playAnimation(this.pepeWalkImages); //when on graound show walk img
             }
         }
@@ -69,4 +81,28 @@ class Character extends Movable {
         }
         this.speedY = 30;
     }
+
+    playCharacterSound = () => {
+        try {
+            if(this.isDead())
+            {
+                AudioHub.playOne(this.Sounds.dead);
+            }
+            else if(Keyboard.ArrowRight || Keyboard.ArrowLeft){
+                AudioHub.playOne(this.Sounds.walk);
+            }
+            else if(this.isHurt()){
+                AudioHub.playOne(this.Sounds.damage);
+            }else if(Keyboard.SPACE)
+            {
+                AudioHub.playOne(this.Sounds.jump);
+            }else{
+                AudioHub.stopAll();
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    
+    };
+
 }

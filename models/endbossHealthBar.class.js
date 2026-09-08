@@ -1,4 +1,7 @@
-class EndbossHealth_Statusbar extends Drawable {
+import { Drawable } from "./drawable.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+
+export class EndbossHealth_Statusbar extends Drawable {
     x = 500;
     y = 0;
     energy = 100

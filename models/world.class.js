@@ -1,8 +1,23 @@
-class World {
-    character = new Character();
+import { level1 } from "../js/levels/level1.js";
+import { AudioHub } from "./audio.class.js";
+import { Bottle_Statusbar } from "./bottles_statusbar.class.js";
+import { Character } from "./character.class.js";
+import { Coins_Statusbar } from "./coins_statusbar.class.js";
+import { Endboss } from "./endboss.class.js";
+import { EndbossHealth_Statusbar } from "./endbossHealthBar.class.js";
+import { Globals } from "./globals.class.js";
+import { Health_Statusbar } from "./health-statusbar.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+import { IntervalHub } from "./intervalHub.class.js";
+import { Keyboard } from "./keyboard.class.js";
+import { Throwable } from "./throwable.class.js";
+
+export class World {
+    character = new Character
     level = level1;
     gameOverYouLoose = false;
     gameOverYouWin = false;
+    isbottolThrow = false;
     contex;
     canvas;
     keyboard;
@@ -12,10 +27,11 @@ class World {
     bottlesbar = new Bottle_Statusbar();
     endbossBar = new EndbossHealth_Statusbar();
     throwable_Object = [];
-    totalCoins = this.level.coins_collectable;
-    totalBottols = this.level.bottols_collectable;
+    totalCoins = this.level.coins_total;
+    totalBottols = this.level.bottols_total;
     collect_coins_array = [];
     collect_bottles_array = [];
+    Sounds = AudioHub.ITEMSTOCOLLECT
 
     constructor(_Canvas, _keyboard) {
         this.canvas = _Canvas;
@@ -107,6 +123,7 @@ class World {
                     this.character.y + 100,
                 );
                 this.throwable_Object.push(bottle);
+                this.collect_bottles_array.pop();
                 //update statausbar here..
                 let Images = ImageHub.STATUSBAR.bottles;
                 let collectedBottol = this.collect_bottles_array.length;
@@ -118,10 +135,10 @@ class World {
                     this.bottlesbar,
                 );
                 this.checkThrowableObjectsCollision();
-                this.collect_bottles_array.pop(); //remove one bottol when throw one bottol.
-            
+                            
             }else{
-                console.log("no bottol collected")
+                this.collect_bottles_array.length = 0;
+                
             }
         }
     }
@@ -130,13 +147,15 @@ class World {
         this.collect_bottles_array.forEach((bottol) => {
             this.level.enemies.forEach((enemy,index) => {
                 if(bottol.isColliding(enemy)){
+                        Globals.isBottolSplash = true;
                         enemy.isDead = true;
                         enemy.loadImages(ImageHub.CHICKEN.dead)
                         setTimeout(() => {
                             this.level.enemies.splice(index,1);
                         }, 1000);
-                }
-            
+                }else{
+                    Globals.isBottolSplash = false; //this variable used to play bottol splash sound
+                }            
             });
         });
     }
@@ -144,15 +163,13 @@ class World {
     
 
     checkEnemyCollision() {
-        this.level.enemies.forEach((enemy, index) => {
+        this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (enemy.type === "chicken" && this.character.isFalling) {
-                    enemy.isDead = true;
-                    setTimeout(() => {
-                        this.level.enemies.splice(enemy[index], 1);
-                    }, 1500);
-                } else if ( enemy.type === "chicken" || (enemy.type === "endboss" && !this.character.isAboveGround())) {
+                if (this.character.speedY < 0 && enemy.type === "chicken" && this.character.isFalling) {
+                    enemy.energy = 0;
+                } else if (this.character.y === 180 && enemy.type === "chicken" || (enemy.type === "endboss" && !this.character.isAboveGround()) ) {
                     {
+                        enemy.energy = 100;
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;
                         this.heathbar.setPercentage(
@@ -166,34 +183,34 @@ class World {
     }
 
     checkCoinCollision() {
-        this.level.coins_collectable.forEach((coin, index) => {
+        this.level.coins_total.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
+                AudioHub.playOne(this.Sounds.coin);
                 this.collect_coins_array.push(coin);
                 this.totalCoins.splice(index, 1);
                 let Images = ImageHub.STATUSBAR.coins;
                 let collectedCoins = this.collect_coins_array.length;
-                let totalCoins = this.level.coins_collectable.length;
                 this.updateStatusBars(
                     collectedCoins,
-                    totalCoins,
+                    this.totalCoins.length,
                     Images,
                     this.coinsbar,
                 );
             }
+            AudioHub.stopOne(this.Sounds.coin);
         });
     }
 
     checkBottolCollision() {
-        this.level.bottols_collectable.forEach((bottle, index) => {
+        this.level.bottols_total.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.collect_bottles_array.push(bottle);
                 this.totalBottols.splice(index, 1);
                 let Image = ImageHub.STATUSBAR.bottles;
                 let collectedBottols = this.collect_bottles_array.length;
-                let totalBottols = this.level.bottols_collectable.length;
                 this.updateStatusBars(
                     collectedBottols,
-                    totalBottols,
+                    this.totalBottols.length,
                     Image,
                     this.bottlesbar,
                 );

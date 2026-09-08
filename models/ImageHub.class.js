@@ -1,4 +1,4 @@
-class ImageHub extends World {
+export class ImageHub  {
 
     static CHICKEN = {
         walk: [
@@ -57,7 +57,7 @@ class ImageHub extends World {
             "img/2_character_pepe/3_jump/J-39.png",
         ],
 
-        ideal: ["img/2_character_pepe/1_idle/idle/I-10.png"],
+        ideal: ["img/2_character_pepe/1_idle/long_idle/I-13.png"],
         dead: [
             "img/2_character_pepe/5_dead/D-51.png",
             "img/2_character_pepe/5_dead/D-52.png",

@@ -1,4 +1,8 @@
-class Bottle_Statusbar extends Drawable {
+import { Drawable } from "./drawable.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+
+
+export class Bottle_Statusbar extends Drawable {
     x = 20;
     y = 80; 
 

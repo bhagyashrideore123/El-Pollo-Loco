@@ -1,6 +1,14 @@
-class Throwable extends Movable {
+import { AudioHub } from "./audio.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+import { IntervalHub } from "./intervalHub.class.js";
+import { Movable } from "./movable.class.js";
+
+
+export class Throwable extends Movable {
     height = 60;
     width = 50;
+    bottolFalling = true;
+    Sounds = AudioHub.ITEMSTOCOLLECT;
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
     offset = {
@@ -16,7 +24,8 @@ class Throwable extends Movable {
         this.x = _x;
         this.y = _y;
         this.speedY = 20;
-        IntervalHub.startInterval(this.throw, 1000 / 25);
+        IntervalHub.startInterval(this.throw, 1000 / 30);
+        IntervalHub.startInterval(this.playBottolSplash, 1000 / 30);
         this.getRealFrame();
     }
 
@@ -25,4 +34,11 @@ class Throwable extends Movable {
         this.x += 10;
         this.playAnimation(this.BottoleRotation);
     };
+
+    playBottolSplash = () =>{
+        if(this.bottolSplash)
+        {
+            AudioHub.playOne(this.Sounds.splash);
+        }      
+    }
 }

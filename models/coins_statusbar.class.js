@@ -1,4 +1,7 @@
-class Coins_Statusbar extends Drawable {
+import { Drawable } from "./drawable.class.js";
+import { ImageHub } from "./ImageHub.class.js";
+
+export class Coins_Statusbar extends Drawable {
     x = 20;
     y = 40; 
 
@@ -9,5 +12,4 @@ class Coins_Statusbar extends Drawable {
         this.setPercentage(0,this.Statusbar_Coins);     
     } 
     
-  
 }

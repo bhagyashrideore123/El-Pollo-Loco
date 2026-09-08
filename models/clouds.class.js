@@ -1,4 +1,6 @@
-class Clouds extends Movable {
+import { Movable } from "./movable.class.js";
+
+export class Clouds extends Movable {
     y = 20; //clouds will be always at this 20 position of y axis.
     width = 500;
     height = 250;

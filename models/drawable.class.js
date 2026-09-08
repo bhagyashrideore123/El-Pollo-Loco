@@ -1,4 +1,4 @@
-class Drawable{
+export class Drawable{
     x = 100;
     y = 100;
     width = 200;
@@ -7,7 +7,6 @@ class Drawable{
     imageCache = {};
     currentImage = 0;
     percentage = 100;
-    isFalling = false;
     
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
@@ -37,19 +36,19 @@ class Drawable{
     }
 
     drawFrame(contex) {
-        if ( this instanceof Throwable ||  this instanceof Endboss || this instanceof Character || this instanceof Chicken) //draw rectangale frame only for character and chicken instances
-        {
-            contex.beginPath();
-            contex.lineWidth = "3";
-            contex.strokeStyle = "blue";
-            contex.rect(
-                this.x + this.offset.left,
-                this.y + this.offset.top,
-                this.width - this.offset.left - this.offset.right,
-                this.height - this.offset.top - this.offset.bottom,
-            ); //here showing the rectangle for each moving object with help of offset calculations
-            contex.stroke();
-        }
+        // if ( this instanceof Throwable ||  this instanceof Endboss || this instanceof Character || this instanceof Chicken || this instanceof MiniChicken) //draw rectangale frame only for character and chicken instances
+        // {
+        //     contex.beginPath();
+        //     contex.lineWidth = "3";
+        //     contex.strokeStyle = "blue";
+        //     contex.rect(
+        //         this.x + this.offset.left,
+        //         this.y + this.offset.top,
+        //         this.width - this.offset.left - this.offset.right,
+        //         this.height - this.offset.top - this.offset.bottom,
+        //     ); //here showing the rectangle for each moving object with help of offset calculations
+        //     contex.stroke();
+        // }
     }
 
     setPercentage(_percentage, _IMAGE) {

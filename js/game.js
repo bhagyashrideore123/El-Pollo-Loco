@@ -1,5 +1,7 @@
+import { Keyboard } from "../models/keyboard.class.js";
+import { World } from "../models/world.class.js";
+
 let world;
-//let keyboard = new Keyboard();
 let startGameScreen = document.getElementById("startScreen");
 let endGameScreen = document.getElementById("EndScreen");
 let canvas = document.getElementById("canvas");
@@ -52,6 +54,7 @@ function enterFullScreen(element) {
 function checkScreen() {
     if (window.matchMedia("(hover: none)").matches) {
         resControls.style.display = "flex";
-        console.log("hover not possible");
     }
 }
+
+init();

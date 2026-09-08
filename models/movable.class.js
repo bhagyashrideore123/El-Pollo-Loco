@@ -1,4 +1,7 @@
-class Movable extends Drawable {
+import { AudioHub } from "./audio.class.js";
+import { Drawable } from "./drawable.class.js";
+
+export class Movable extends Drawable {
     speed = 0.1;
     otherDirection = false;
     speedY = 0;
@@ -15,7 +18,8 @@ class Movable extends Drawable {
     rY; //real Y
     rW; //real width
     rH; //real height
-
+    bottolSplash = false;
+    
     constructor()
     {
         super();
@@ -26,7 +30,7 @@ class Movable extends Drawable {
     }
 
     moveLeft() {
-        this.x -= this.speed;
+    this.x -= this.speed;
     }
 
     playAnimation(array) {
@@ -44,10 +48,11 @@ class Movable extends Drawable {
     }
 
     isAboveGround(){
-        if(this instanceof Throwable) //trwable obj should should always fall
+        if(this.bottolFalling) //trwable obj should should always fall
         {
             return true;
         }else{
+            this.bottolFalling = false;
             return this.y < 180;
         }
         
@@ -72,7 +77,7 @@ class Movable extends Drawable {
     }
 
     hit() {
-        this.energy -= 2; //when they meet reduce energy of character
+        this.energy -= 2;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -89,4 +94,5 @@ class Movable extends Drawable {
     isDead() {
         return this.energy == 0;
     }
+
 }
