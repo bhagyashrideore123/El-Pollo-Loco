@@ -13,37 +13,36 @@ class Sounds{
 
 
 export class AudioHub {
-    static CHARACTER = {
-        walk: new Sounds("./audio/character/characterRun.mp3"),
-        jump: new Sounds("audio/character/characterJump.wav"),
-        damage: new Sounds("audio/character/characterDamage.mp3"),
-        dead: new Sounds("audio/character/characterDead.wav"),
-        snoring: new Sounds("audio/character/characterSnoring.mp3"),
-    };
+    static CHARACTER_WALK = new Sounds("./audio/character/characterRun.mp3");
+    static CHARACTER_JUMP = new Sounds("audio/character/characterJump.wav");
+    static CHARACTER_HURT = new Sounds("audio/character/characterDamage.mp3");
+    static CHARACTER_DEAD = new Sounds("audio/character/characterDead.wav");
+    static CHARACTER_SNORRING = new Sounds("audio/character/characterSnoring.mp3");
 
-    static ENEMIES = {
-        deadChicken: new Sounds("audio/enemy/chickenDead2.mp3"),
-        deadMiniChicken: new Sounds("audio/enemy/chickenDead.mp3"),
-        deadEndBoss: new Sounds("audio/enemy/endbossApproach.wav"),
-    };
+    static CHICKEN_DEAD = new Sounds("audio/enemy/chickenDead2.mp3");
+    static MINICHICKEN_DEAD = new Sounds("audio/enemy/chickenDead.mp3");
+    static ENDBOSS_DEAD = new Sounds("audio/enemy/endbossApproach.wav");
 
-    static ITEMSTOCOLLECT = {
-        bottle: new Sounds(
-            "audio/otherSounds/bottleCollectSound.wav",
-        ),
-        coin: new Sounds("audio/otherSounds/collectSound.wav"),
-        splash: new Sounds("audio/otherSounds/bottleBreak.mp3"),
-    };
+    static COIN_COLLECT = new Sounds("audio/otherSounds/collectSound.wav");
+    static BOTTOL_COLLECT = new Sounds("audio/otherSounds/bottleCollectSound.wav");
+    static BOTTOL_SPLASH =  new Sounds("audio/otherSounds/bottleBreak.mp3");
 
-    static GAME = {
-        gameSounds: new Sounds("audio/game/gameStart.mp3"),
-    };
+    static GAME = new Sounds("audio/game/gameStart.mp3");
+
 
     static allSounds = [
-        AudioHub.CHARACTER,
-        AudioHub.ENEMIES,
-        AudioHub.ITEMSTOCOLLECT,
-        AudioHub.GAME,
+        AudioHub.CHARACTER_WALK,
+        AudioHub.CHARACTER_JUMP,
+        AudioHub.CHARACTER_HURT,
+        AudioHub.CHARACTER_DEAD,
+        AudioHub.CHARACTER_SNORRING,
+        AudioHub.CHICKEN_DEAD,
+        AudioHub.MINICHICKEN_DEAD,
+        AudioHub.ENDBOSS_DEAD,
+        AudioHub.COIN_COLLECT,
+        AudioHub.BOTTOL_COLLECT,
+        AudioHub.BOTTOL_SPLASH,
+        AudioHub.GAME
     ];
 
 
@@ -52,11 +51,11 @@ export class AudioHub {
     static playOne(Sounds) {
         if(Sounds)
         {
-            Sounds.file.volume = Globals.mute ? 0 : 0.01;        
+            Sounds.file.volume = Globals.mute ? 0 : 0.05;        
 
             if (this.isPlaying === true) {
                 return;
-            } else if (Sounds.file.readyState === 4 || Sounds.isLoaded) {
+            } else if (Sounds.file.readyState > 0 || Sounds.isLoaded) {
                 Sounds.file.currentTime = 0;
                 Sounds.isLoaded = true;
                 Sounds.file.play();
@@ -89,20 +88,16 @@ export class AudioHub {
     }
 
     static muteAll() {
-        AudioHub.allSounds.forEach((array) => {
-            Object.values(array).forEach((sound) => {
+        AudioHub.allSounds.forEach((sound) => {
                 sound.muted = true;
                 sound.file.volume = 0;
-            });
         });
     }
 
     static unmuteAll() {
-        AudioHub.allSounds.forEach((array) => {
-            Object.values(array).forEach((sound) => {
+        AudioHub.allSounds.forEach((sound) => {
                 sound.muted = false;
                 sound.file.volume = 0.1;
-            });
         });
     }
 }

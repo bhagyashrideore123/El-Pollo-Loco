@@ -1,4 +1,5 @@
 import { AudioHub } from "./audio.class.js";
+import { Globals } from "./globals.class.js";
 import { ImageHub } from "./ImageHub.class.js";
 import { IntervalHub } from "./intervalHub.class.js";
 import { Movable } from "./movable.class.js";
@@ -9,8 +10,6 @@ export class Chicken extends Movable {
     width = 80;
     type = "chicken";
     energy = 100;
-    Sounds = AudioHub.ENEMIES;
-    SoundChicken = AudioHub.ENEMIES.deadChicken;
     chickenImages = ImageHub.CHICKEN;
     speed = 0.1; // we make speed here different so taht it will look dynamic
     offset = {
@@ -31,25 +30,27 @@ export class Chicken extends Movable {
     }
 
     animate = () => {
-        if (this.isDead()) {
-            this.y += 3; // Make the dead chicken fall down slowly
+        if (this.energy === 0) {
+            this.y += 1; // Make the dead chicken fall down slowly
         } else {
             this.moveLeft();
         }
     };
     animateChicken = () => {
-        if (this.isDead()) {
+        if (this.energy === 0) {
             this.loadImage(ImageHub.CHICKEN.dead); // Show dead image
+            Globals.isBottolSplash = true;
         } else {
+            Globals.isBottolSplash = false;
             this.playAnimation(this.chickenImages.walk);
         }
     };
 
     playChickenSound=()=> {
-        if (this.isDead()) {
-            AudioHub.playOne(this.Sounds.deadChicken);
+        if (this.energy === 0) {
+            AudioHub.playOne(AudioHub.CHICKEN_DEAD);
         }else{
-            AudioHub.stopOne(this.Sounds.deadChicken);
+            AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
         }
     }
 }

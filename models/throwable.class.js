@@ -1,4 +1,5 @@
 import { AudioHub } from "./audio.class.js";
+import { Globals } from "./globals.class.js";
 import { ImageHub } from "./ImageHub.class.js";
 import { IntervalHub } from "./intervalHub.class.js";
 import { Movable } from "./movable.class.js";
@@ -11,6 +12,7 @@ export class Throwable extends Movable {
     Sounds = AudioHub.ITEMSTOCOLLECT;
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
+    BottolSplash =  ImageHub.SALSABOTTOL.bottle_splash;
     offset = {
         top: 10,
         right: 10,
@@ -21,6 +23,7 @@ export class Throwable extends Movable {
     constructor(_x, _y) {
         super().loadImage(this.BottleImage);
         this.loadImages(this.BottoleRotation);
+        this.loadImages(this.BottolSplash);
         this.x = _x;
         this.y = _y;
         this.speedY = 20;
@@ -36,9 +39,10 @@ export class Throwable extends Movable {
     };
 
     playBottolSplash = () =>{
-        if(this.bottolSplash)
+        if(Globals.isBottolSplash)
         {
-            AudioHub.playOne(this.Sounds.splash);
+            this.playAnimation(this.BottolSplash);
+            AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
         }      
     }
 }

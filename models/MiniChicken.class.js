@@ -1,4 +1,5 @@
 import { AudioHub } from "./audio.class.js";
+import { Globals } from "./globals.class.js";
 import { ImageHub } from "./ImageHub.class.js";
 import { IntervalHub } from "./intervalHub.class.js";
 import { Movable } from "./movable.class.js";
@@ -9,7 +10,6 @@ export class MiniChicken extends Movable {
     width = 60;
     type = "chicken";
     chickenImages = ImageHub.MINICHICKEN;
-    Sounds =  AudioHub.ENEMIES;
     energy = 100;
     speed = 0.1; // we make speed here different so taht it will look dynamic
     offset = {
@@ -30,7 +30,7 @@ export class MiniChicken extends Movable {
     }
 
     animate = () => {
-        if (this.isDead()) {
+        if (this.energy === 0) {
             this.y += 1; // Make the dead chicken fall down slowly
         } else {
             this.moveLeft();
@@ -38,18 +38,20 @@ export class MiniChicken extends Movable {
     };
 
     animateMiniChicken = () => {
-        if (this.isDead()) {
+        if (this.energy === 0) {
+            Globals.isBottolSplash = true;
             this.loadImage(ImageHub.MINICHICKEN.dead); // Show dead image
         } else {
+            Globals.isBottolSplash = true;
             this.playAnimation(this.chickenImages.walk);
         }
     };
 
-   playMiniChickenSound =()=>{
-      if (this.isDead()) {
-            AudioHub.playOne(this.Sounds.deadMiniChicken);
-        }else{
-            AudioHub.stopOne(this.Sounds.deadMiniChicken);
+    playMiniChickenSound = () => {
+        if (this.energy === 0) {
+            AudioHub.playOne(AudioHub.MINICHICKEN_DEAD);
+        } else {
+            AudioHub.stopOne(AudioHub.MINICHICKEN_DEAD);
         }
-   }
+    };
 }

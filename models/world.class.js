@@ -112,30 +112,29 @@ export class World {
     checkCollision() {
         this.checkCoinCollision();
         this.checkBottolCollision();
+        this.checkEnemyBottol();
         this.checkThrowObject();
     }
 
     checkThrowObject() {
-        if (Keyboard.D) {
+        if (Keyboard.D && !Globals.canThrow) {//this canThrow checks on one press only one bottol should should throw
             if (this.collect_bottles_array.length > 0) {
                 let bottle = new Throwable(
                     this.character.x + 100,
                     this.character.y + 100,
                 );
                 this.throwable_Object.push(bottle);
-                this.collect_bottles_array.pop();
+                let bottol = this.collect_bottles_array.pop();
                 //update statausbar here..
                 let Images = ImageHub.STATUSBAR.bottles;
                 let collectedBottol = this.collect_bottles_array.length;
-                let totalBottols = this.level.bottols_collectable.length;
+                let totalBottols = this.level.bottols_total.length;
                 this.updateStatusBars(
                     collectedBottol,
                     totalBottols,
                     Images,
                     this.bottlesbar,
-                );
-                this.checkThrowableObjectsCollision();
-                            
+                );                     
             }else{
                 this.collect_bottles_array.length = 0;
                 
@@ -143,21 +142,32 @@ export class World {
         }
     }
 
-    checkThrowableObjectsCollision() {
-        this.collect_bottles_array.forEach((bottol) => {
-            this.level.enemies.forEach((enemy,index) => {
-                if(bottol.isColliding(enemy)){
-                        Globals.isBottolSplash = true;
-                        enemy.isDead = true;
-                        enemy.loadImages(ImageHub.CHICKEN.dead)
-                        setTimeout(() => {
-                            this.level.enemies.splice(index,1);
-                        }, 1000);
-                }else{
-                    Globals.isBottolSplash = false; //this variable used to play bottol splash sound
-                }            
-            });
-        });
+    checkEnemyBottol() {
+        this.throwable_Object.forEach((bottle, bottleIndex) => {
+			this.level.enemies.forEach((enemy) => {
+				if (bottle.isColliding(enemy) && !enemy.isDead()) {
+                    Globals.enemyBottolHit = true;
+					enemy.hit();
+					AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
+					this.throwable_Object.splice(bottleIndex, 1);
+				}
+			});
+		});
+        // this.collect_bottles_array.forEach((bottol) => {
+        //     this.level.enemies.forEach((enemy,index) => {
+        //         if(bottol.isColliding(enemy)){
+        //                 Globals.isBottolSplash = true;
+        //                 enemy.isDead = true;
+        //                 enemy.loadImages(ImageHub.CHICKEN.dead)
+        //                 setTimeout(() => {
+        //                     this.level.enemies.splice(index,1);
+        //                 }, 1000);
+        //         }
+        //         else{
+        //             Globals.isBottolSplash = false; //this variable used to play bottol splash sound
+        //         }            
+        //     });
+        // });
     }
 
     
@@ -165,9 +175,9 @@ export class World {
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.speedY < 0 && enemy.type === "chicken" && this.character.isFalling) {
+                if (this.character.speedY < 0 && !(enemy instanceof Endboss) ) {
                     enemy.energy = 0;
-                } else if (this.character.y === 180 && enemy.type === "chicken" || (enemy.type === "endboss" && !this.character.isAboveGround()) ) {
+                } else if (this.character.y === 180 && enemy.type === "chicken" && !this.character.isAboveGround() ) {
                     {
                         enemy.energy = 100;
                         this.character.hit();
@@ -185,7 +195,7 @@ export class World {
     checkCoinCollision() {
         this.level.coins_total.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
-                AudioHub.playOne(this.Sounds.coin);
+                AudioHub.playOne(AudioHub.COIN_COLLECT);
                 this.collect_coins_array.push(coin);
                 this.totalCoins.splice(index, 1);
                 let Images = ImageHub.STATUSBAR.coins;
@@ -196,14 +206,17 @@ export class World {
                     Images,
                     this.coinsbar,
                 );
+            setTimeout(() => {
+                AudioHub.stopOne(AudioHub.COIN_COLLECT);
+            }, 500);
             }
-            AudioHub.stopOne(this.Sounds.coin);
         });
     }
 
     checkBottolCollision() {
         this.level.bottols_total.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
+                AudioHub.playOne(AudioHub.BOTTOL_COLLECT);
                 this.collect_bottles_array.push(bottle);
                 this.totalBottols.splice(index, 1);
                 let Image = ImageHub.STATUSBAR.bottles;
@@ -214,6 +227,9 @@ export class World {
                     Image,
                     this.bottlesbar,
                 );
+                setTimeout(() => {
+                    AudioHub.stopOne(AudioHub.BOTTOL_COLLECT);
+                }, 200);
             }
         });
     }

@@ -1,5 +1,5 @@
-import { AudioHub } from "./audio.class.js";
 import { Drawable } from "./drawable.class.js";
+import { Globals } from "./globals.class.js";
 
 export class Movable extends Drawable {
     speed = 0.1;
@@ -44,7 +44,10 @@ export class Movable extends Drawable {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
-            }
+            }else {
+				this.y = 180;
+				this.speedY = 0;
+			}
     }
 
     isAboveGround(){
@@ -77,12 +80,19 @@ export class Movable extends Drawable {
     }
 
     hit() {
-        this.energy -= 2;
-        if (this.energy < 0) {
+        if(Globals.enemyBottolHit)//this use to cofirm the hit action on eenemy by bottol
+        {
             this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        }else{
+            Globals.enemyBottolHit = false;
+            this.energy -= 1;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
+        
     }
     
     isHurt() {

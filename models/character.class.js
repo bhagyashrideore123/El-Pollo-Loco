@@ -11,7 +11,6 @@ export class Character extends Movable {
     height = 250;
     width = 100;
     isIdeal = true;
-    Sounds = AudioHub.CHARACTER;
     pepeWalkImages = ImageHub.PEPE.walk;
     pepeJumpImages = ImageHub.PEPE.jump;
     pepeDeadImages = ImageHub.PEPE.dead;
@@ -84,19 +83,19 @@ export class Character extends Movable {
 
     playCharacterSound = () => {
         try {
-            if(this.isDead())
-            {
-                AudioHub.playOne(this.Sounds.dead);
+            if(this.isDead()){
+                AudioHub.playOne(AudioHub.CHARACTER_DEAD);
             }
             else if(Keyboard.ArrowRight || Keyboard.ArrowLeft){
-                AudioHub.playOne(this.Sounds.walk);
+                AudioHub.playOne(AudioHub.CHARACTER_WALK);
             }
             else if(this.isHurt()){
-                AudioHub.playOne(this.Sounds.damage);
-            }else if(Keyboard.SPACE)
-            {
-                AudioHub.playOne(this.Sounds.jump);
-            }else{
+                AudioHub.playOne(AudioHub.CHARACTER_HURT);
+            }
+            else if(Keyboard.SPACE){
+                AudioHub.playOne(AudioHub.CHARACTER_JUMP);
+            }
+            else{
                 AudioHub.stopAll();
             }
         } catch (error) {
