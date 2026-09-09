@@ -50,7 +50,7 @@ export class AudioHub {
     // Spielt eine einzelne Audiodatei ab
     static playOne(Sounds) {
         if (Sounds) {
-            Sounds.file.volume = Globals.mute ? 0 : 0.5;
+            Sounds.file.volume = Globals.isMuted ? 0 : 0.5;
 
             if (this.isPlaying === true) {
                 return;
@@ -83,17 +83,4 @@ export class AudioHub {
         }
     }
 
-    static muteAll() {
-        AudioHub.allSounds.forEach((sound) => {
-            sound.muted = true;
-            sound.file.volume = 0;
-        });
-    }
-
-    static unmuteAll() {
-        AudioHub.allSounds.forEach((sound) => {
-            sound.muted = false;
-            sound.file.volume = 0.1;
-        });
-    }
 }
