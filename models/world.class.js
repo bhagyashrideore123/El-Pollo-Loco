@@ -15,8 +15,6 @@ import { Throwable } from "./throwable.class.js";
 export class World {
     character = new Character
     level = level1;
-    gameOverYouLoose = false;
-    gameOverYouWin = false;
     isbottolThrow = false;
     contex;
     canvas;
@@ -180,7 +178,7 @@ export class World {
                     enemy.isAlive = false;
                     enemy.energy = 0;
                     console.log("one")
-                } else if (enemy.type === "chicken" && !this.character.isAboveGround() && this.isFalling) {
+                } else if (enemy.type === "chicken" && !this.character.isAboveGround() ) {
                     {
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;

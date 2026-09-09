@@ -1,21 +1,19 @@
+import { Globals } from "../models/globals.class.js";
 import { Keyboard } from "../models/keyboard.class.js";
 import { World } from "../models/world.class.js";
 
 let world;
-let startGameScreen = document.getElementById("startScreen");
-let endGameScreen = document.getElementById("EndScreen");
-let canvas = document.getElementById("canvas");
-let resControls = document.getElementById("responsiveKontrols");
 
 function init() {
-    // endGame();
-    canvas.style.display = "block";
-    startGameScreen.style.display = "none";
-    endGameScreen.style.display = "none";
-    resControls.style.display = "none";
+    Globals.canvas.style.display = "block";
+    Globals.startGameScreen.style.display = "none";
+    Globals.resControls.style.display = "none";
+    Globals.lostScreen.style.display = "none";
+    Globals.wonScreen.style.display = "none";
+
     Keyboard.keyboard_eventListener();
-    canvas = document.getElementById("canvas");
-    world = new World(canvas);
+    Globals.canvas = document.getElementById("canvas");
+    world = new World(Globals.canvas);
     setInterval(() => {
         checkScreen();
     }, 1000);
@@ -25,7 +23,7 @@ function startGame() {
     canvas.style.display = "block";
     startGameScreen.style.display = "none";
     Keyboard.keyboard_eventListener();
-    world = new World(canvas);
+    world = new World(Globals.canvas);
 }
 
 function endGame() {
@@ -53,7 +51,9 @@ function enterFullScreen(element) {
 
 function checkScreen() {
     if (window.matchMedia("(hover: none)").matches) {
-        resControls.style.display = "flex";
+        Globals.resControls.style.display = "flex";
+    }else{
+        Globals.resControls.style.display = "none";
     }
 }
 

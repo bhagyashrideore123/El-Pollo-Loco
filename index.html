@@ -21,23 +21,35 @@
         <img class="startScreenImg" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="start_screen_of_game">
         <button onclick="startGame()">Start >></button>
     </div>
-    <div id="EndScreen" class="start_container">
+    <!-- <div id="EndBackgroundScreen" class="start_container">
         <img class="EndScreenImg" src="img/5_background/first_half_background.png" alt="end_screen_of_game">
-    </div>
+    </div> -->
     <div id="fullscreen">
-        <img class="fullscreenBtn" onclick="fullscreenStart()" src="./img/logos/fullscreen.svg" alt="fullscreen_symbol">
+        <img id="fullscreen" class="fullscreenBtn" onclick="fullscreenStart()" src="./img/logos/fullscreen.svg" alt="fullscreen_symbol">
         <canvas id="canvas" width="720" height="480"></canvas>
     </div>
+
+    <!-- yopu lost screen -->
+    <div id="lostScreen" class="flexClass">
+        <img class="youLostImg" src="img/You won, you lost/You lost.png" alt="you_lost_screen">
+        <button onclick="startGame()">Restart Game</button>
+    </div>
+    <!-- you won screen -->
+    <div id="wonScreen" class="flexClass">
+        <img class="youWonImg" src="img/You won, you lost/You won A.png" alt="you_win_screen">
+        <button onclick="startGame()">Play Again</button>
+    </div>
+
     <div class="responsiveControls" id="responsiveKontrols">
-            <div>
-                <img src="img/responsiveControlsImages/goBack.svg" alt="go_back_button">
-                <img src="img/responsiveControlsImages/run.svg" alt="run_button">
-            </div>
-            <div>
-                <img src="img/responsiveControlsImages/jump.svg" alt="jump_button">
-                <img src="img/responsiveControlsImages/bottol.svg" alt="throw_bottol">
-            </div>
+        <div>
+            <img src="img/responsiveControlsImages/goBack.svg" alt="go_back_button">
+            <img src="img/responsiveControlsImages/run.svg" alt="run_button">
         </div>
+        <div>
+            <img src="img/responsiveControlsImages/jump.svg" alt="jump_button">
+            <img src="img/responsiveControlsImages/bottol.svg" alt="throw_bottol">
+        </div>
+    </div>
     <div class="PlayDetails">
         <h3>Arrow Left/Right = Walk</h3>
         <h3>Space = Jump</h3>

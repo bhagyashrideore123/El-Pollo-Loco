@@ -51,13 +51,7 @@ export class Character extends Movable {
     animateCharacter = () => {
         if (this.isDead()) {
             this.playAnimation(this.pepeDeadImages);
-            this.gameOverYouLoose = true;
-            setTimeout(() => {
-                document.getElementById("EndScreen").style.display = "flex";
-                document.getElementById("EndScreen").innerHTML = youLost();
-                document.getElementById("canvas").style.display = "none";
-                document.getElementById("startScreen").style.display = "none";
-            }, 2000);
+            this.youLoseScreen();
         } else if (this.isHurt()) {
             this.playAnimation(this.pepeHitImages);
         } else if (this.isAboveGround()) {
@@ -75,8 +69,7 @@ export class Character extends Movable {
     };
 
     jump() {
-        this.speedY = 30;
-    }
+        this.speedY = 30;    }
 
     playCharacterSound = () => {
         try {
@@ -95,4 +88,5 @@ export class Character extends Movable {
             console.log(error);
         }
     };
+
 }

@@ -1,4 +1,6 @@
-export class Drawable{
+import { Globals } from "./globals.class.js";
+
+export class Drawable {
     x = 100;
     y = 100;
     width = 200;
@@ -7,7 +9,7 @@ export class Drawable{
     imageCache = {};
     currentImage = 0;
     percentage = 100;
-    
+
     loadImage(path) {
         this.img = new Image(); //this.img is JS defined class which works as <img src=""> tag
         this.img.src = path;
@@ -22,16 +24,12 @@ export class Drawable{
         });
     }
 
-    draw(contex)
-    {
-        try{
-        contex.drawImage(this.img, this.x, this.y, this.width, this.height); //here we give movable object to canvas.
-
-        }catch(e)
-        {
-            console.log("error in image loading:",e);
-            console.log("error in image loading:",this.img.src);
-            
+    draw(contex) {
+        try {
+            contex.drawImage(this.img, this.x, this.y, this.width, this.height); //here we give movable object to canvas.
+        } catch (e) {
+            console.log("error in image loading:", e);
+            console.log("error in image loading:", this.img.src);
         }
     }
 
@@ -53,7 +51,7 @@ export class Drawable{
 
     setPercentage(_percentage, _IMAGE) {
         this.percentage = _percentage; //=> 0.....5
-        let path =  _IMAGE[this.resolveImageIndex()];
+        let path = _IMAGE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
@@ -73,4 +71,27 @@ export class Drawable{
         }
     }
 
+    youLoseScreen() {
+        Globals.YouLoose = true;
+        Globals.YouWin = false;
+        setTimeout(() => {
+            Globals.canvas.style.display = "none";
+            Globals.startGameScreen.style.display = "none";
+            Globals.lostScreen.style.display = "flex";
+            Globals.wonScreen.style.display = "none";
+            Globals.fullscreen.style.display = "none";
+        }, 2000);
+    }
+
+    youWonScreen() {
+        Globals.YouWin = true;
+        Globals.YouLoose = false;
+        setTimeout(() => {
+            Globals.canvas.style.display = "none";
+            Globals.startGameScreen.style.display = "none";
+            Globals.lostScreen.style.display = "none";
+            Globals.wonScreen.style.display = "flex";
+            Globals.fullscreen.style.display = "none";
+        }, 2000);
+    }
 }
