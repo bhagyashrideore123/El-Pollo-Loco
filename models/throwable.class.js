@@ -10,6 +10,7 @@ export class Throwable extends Movable {
     width = 50;
     bottolFalling = true;
     Sounds = AudioHub.ITEMSTOCOLLECT;
+    isSplashing = false;
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
     BottolSplash =  ImageHub.SALSABOTTOL.bottle_splash;
@@ -28,21 +29,23 @@ export class Throwable extends Movable {
         this.y = _y;
         this.speedY = 20;
         IntervalHub.startInterval(this.throw, 1000 / 30);
-        IntervalHub.startInterval(this.playBottolSplash, 1000 / 30);
-        this.getRealFrame();
+       // this.getRealFrame();
     }
 
     throw = () => {
+        if (this.isSplashing) return; // Stop moving if it is splashing
         this.applyGravity();
         this.x += 10;
         this.playAnimation(this.BottoleRotation);
     };
 
-    playBottolSplash = () =>{
-        if(Globals.isBottolSplash)
-        {
+    splash = () => {
+        if(this.isSplashing)return;
+        this.isSplashing = true;
+        AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
+       // Play splash frames sequentially or loop through it
+        setInterval(() => {
             this.playAnimation(this.BottolSplash);
-            AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
-        }      
+        }, 1000 / 30);        
     }
 }

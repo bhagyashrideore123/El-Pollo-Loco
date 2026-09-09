@@ -104,6 +104,18 @@ export class ImageHub  {
             "img/4_enemie_boss_chicken/3_attack/G19.png",
             "img/4_enemie_boss_chicken/3_attack/G20.png",
         ],
+        hurt:[
+            "img/4_enemie_boss_chicken/4_hurt/G21.png",
+            "img/4_enemie_boss_chicken/4_hurt/G22.png",
+            "img/4_enemie_boss_chicken/4_hurt/G23.png",
+
+        ],
+        dead:[
+            "img/4_enemie_boss_chicken/5_dead/G24.png",
+            "img/4_enemie_boss_chicken/5_dead/G25.png",
+            "img/4_enemie_boss_chicken/5_dead/G26.png",
+
+        ]
     };
 
     static STATUSBAR = {

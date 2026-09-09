@@ -30,7 +30,7 @@ export class Character extends Movable {
         IntervalHub.startInterval(this.animate, 1000 / 60); //60 frames per second
         IntervalHub.startInterval(this.animateCharacter, 1000 / 10);
         IntervalHub.startInterval(this.playCharacterSound, 1000 / 60);
-        this.getRealFrame;
+        //this.getRealFrame;
     }
 
     animate = () => {
@@ -64,44 +64,35 @@ export class Character extends Movable {
             this.playAnimation(this.pepeJumpImages); //when in air show jump images
         } else {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
-                if(this.x === 2500)
-                {
-                    Globals.endBossAlert = true;//this is to start endboss walking when pepe runs till 2500
+                if (this.x > 2500) {
+                    Globals.endBossAlert = true; //this is to start endboss walking when pepe runs till 2500
+                } else {
+                    Globals.endBossAlert = false;
+                    this.playAnimation(this.pepeWalkImages); //when on graound show walk img
                 }
-                Globals.endBossAlert = false;
-                this.playAnimation(this.pepeWalkImages); //when on graound show walk img
             }
         }
     };
 
     jump() {
-        if (this.speedY < 0) {
-            this.isFalling = true;
-        }
         this.speedY = 30;
     }
 
     playCharacterSound = () => {
         try {
-            if(this.isDead()){
+            if (this.isDead()) {
                 AudioHub.playOne(AudioHub.CHARACTER_DEAD);
-            }
-            else if(Keyboard.ArrowRight || Keyboard.ArrowLeft){
+            } else if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
                 AudioHub.playOne(AudioHub.CHARACTER_WALK);
-            }
-            else if(this.isHurt()){
+            } else if (this.isHurt()) {
                 AudioHub.playOne(AudioHub.CHARACTER_HURT);
-            }
-            else if(Keyboard.SPACE){
+            } else if (Keyboard.SPACE) {
                 AudioHub.playOne(AudioHub.CHARACTER_JUMP);
-            }
-            else{
+            } else {
                 AudioHub.stopAll();
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    
     };
-
 }

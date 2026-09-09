@@ -10,6 +10,7 @@ export class MiniChicken extends Movable {
     width = 60;
     type = "chicken";
     chickenImages = ImageHub.MINICHICKEN;
+    isAlive = true;
     energy = 100;
     speed = 0.1; // we make speed here different so taht it will look dynamic
     offset = {
@@ -23,7 +24,7 @@ export class MiniChicken extends Movable {
         this.loadImages(this.chickenImages.walk);
         this.x = 700 + Math.random() * 4000; //chickens start at 200px and then next cheickens will come after that.
         this.speed = this.speed + Math.random() * 0.25;
-        this.getRealFrame();
+        //this.getRealFrame();
         IntervalHub.startInterval(this.animate, 1000 / 60);
         IntervalHub.startInterval(this.animateMiniChicken, 1000 / 10);
         IntervalHub.startInterval(this.playMiniChickenSound, 1000 / 10);

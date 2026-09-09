@@ -1,34 +1,36 @@
 import { Globals } from "./globals.class.js";
 
 // Fixed Audiohub
-class Sounds{
+class Sounds {
     file;
     isLoaded;
     isPlaying = false;
 
-    constructor(_file){
+    constructor(_file) {
         this.file = new Audio(_file);
     }
 }
-
 
 export class AudioHub {
     static CHARACTER_WALK = new Sounds("./audio/character/characterRun.mp3");
     static CHARACTER_JUMP = new Sounds("audio/character/characterJump.wav");
     static CHARACTER_HURT = new Sounds("audio/character/characterDamage.mp3");
     static CHARACTER_DEAD = new Sounds("audio/character/characterDead.wav");
-    static CHARACTER_SNORRING = new Sounds("audio/character/characterSnoring.mp3");
+    static CHARACTER_SNORRING = new Sounds(
+        "audio/character/characterSnoring.mp3",
+    );
 
     static CHICKEN_DEAD = new Sounds("audio/enemy/chickenDead2.mp3");
     static MINICHICKEN_DEAD = new Sounds("audio/enemy/chickenDead.mp3");
     static ENDBOSS_DEAD = new Sounds("audio/enemy/endbossApproach.wav");
 
     static COIN_COLLECT = new Sounds("audio/otherSounds/collectSound.wav");
-    static BOTTOL_COLLECT = new Sounds("audio/otherSounds/bottleCollectSound.wav");
-    static BOTTOL_SPLASH =  new Sounds("audio/otherSounds/bottleBreak.mp3");
+    static BOTTOL_COLLECT = new Sounds(
+        "audio/otherSounds/bottleCollectSound.wav",
+    );
+    static BOTTOL_SPLASH = new Sounds("audio/otherSounds/bottleBreak.mp3");
 
     static GAME = new Sounds("audio/game/gameStart.mp3");
-
 
     static allSounds = [
         AudioHub.CHARACTER_WALK,
@@ -42,16 +44,13 @@ export class AudioHub {
         AudioHub.COIN_COLLECT,
         AudioHub.BOTTOL_COLLECT,
         AudioHub.BOTTOL_SPLASH,
-        AudioHub.GAME
+        AudioHub.GAME,
     ];
-
-
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(Sounds) {
-        if(Sounds)
-        {
-            Sounds.file.volume = Globals.mute ? 0 : 0.05;        
+        if (Sounds) {
+            Sounds.file.volume = Globals.mute ? 0 : 0.5;
 
             if (this.isPlaying === true) {
                 return;
@@ -61,12 +60,10 @@ export class AudioHub {
                 Sounds.file.play();
                 Sounds.isPlaying = true;
             }
-        }else{
-            console.log("sound not loaded ")
+        } else {
+            console.log("sound not loaded ");
         }
-
     }
-
 
     // Stoppt das Abspielen aller Audiodateien
     static stopAll() {
@@ -76,28 +73,27 @@ export class AudioHub {
         });
     }
 
-
     // Stoppt das Abspielen einer einzelnen Audiodatei
     static stopOne(Sounds) {
-        try{
+        try {
             Sounds.file.pause();
             Sounds.isPlaying = false;
-        }catch(e){
-            console.log(e)
-        }            
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     static muteAll() {
         AudioHub.allSounds.forEach((sound) => {
-                sound.muted = true;
-                sound.file.volume = 0;
+            sound.muted = true;
+            sound.file.volume = 0;
         });
     }
 
     static unmuteAll() {
         AudioHub.allSounds.forEach((sound) => {
-                sound.muted = false;
-                sound.file.volume = 0.1;
+            sound.muted = false;
+            sound.file.volume = 0.1;
         });
     }
 }

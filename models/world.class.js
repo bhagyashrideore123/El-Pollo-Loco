@@ -117,14 +117,14 @@ export class World {
     }
 
     checkThrowObject() {
-        if (Keyboard.D && !Globals.canThrow) {//this canThrow checks on one press only one bottol should should throw
-            if (this.collect_bottles_array.length > 0) {
+        if (Keyboard.D && !Globals.canThrow && this.collect_bottles_array.length > 0) {//this canThrow checks on one press only one bottol should should throw
+                Globals.canThrow = false;
                 let bottle = new Throwable(
                     this.character.x + 100,
                     this.character.y + 100,
                 );
                 this.throwable_Object.push(bottle);
-                let bottol = this.collect_bottles_array.pop();
+                this.collect_bottles_array.pop();
                 //update statausbar here..
                 let Images = ImageHub.STATUSBAR.bottles;
                 let collectedBottol = this.collect_bottles_array.length;
@@ -134,40 +134,41 @@ export class World {
                     totalBottols,
                     Images,
                     this.bottlesbar,
-                );                     
-            }else{
-                this.collect_bottles_array.length = 0;
-                
-            }
+                );
+                setTimeout(() => {
+                    Globals.canThrow = true
+                }, 1000);                     
         }
     }
 
     checkEnemyBottol() {
         this.throwable_Object.forEach((bottle, bottleIndex) => {
 			this.level.enemies.forEach((enemy) => {
-				if (bottle.isColliding(enemy) && !enemy.isDead()) {
+				if (bottle.isColliding(enemy) && enemy.type == "chicken" && !enemy.isDead() && !bottle.isSplashing) {
                     Globals.enemyBottolHit = true;
 					enemy.hit();
+                    bottle.splash();
 					AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
-					this.throwable_Object.splice(bottleIndex, 1);
+					setTimeout(() => {
+                        this.throwable_Object.splice(bottleIndex, 1);
+                    }, 300); // Adjust duration to match splash animation length
 				}
+                else if(bottle.isColliding(enemy) && enemy.type == "endboss" && !enemy.isDead && !bottle.isSplashing)
+                {
+                    enemy.hit();
+                    let Images = ImageHub.STATUSBAR.endboss;
+                    this.endbossBar.setPercentage(
+                        enemy.energy,
+                        Images,
+                    );
+                    bottle.splash();
+                    AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
+                    setTimeout(() => {
+                        this.throwable_Object.splice(bottleIndex, 1);
+                    }, 300); // Adjust duration to match splash animation length
+                }
 			});
 		});
-        // this.collect_bottles_array.forEach((bottol) => {
-        //     this.level.enemies.forEach((enemy,index) => {
-        //         if(bottol.isColliding(enemy)){
-        //                 Globals.isBottolSplash = true;
-        //                 enemy.isDead = true;
-        //                 enemy.loadImages(ImageHub.CHICKEN.dead)
-        //                 setTimeout(() => {
-        //                     this.level.enemies.splice(index,1);
-        //                 }, 1000);
-        //         }
-        //         else{
-        //             Globals.isBottolSplash = false; //this variable used to play bottol splash sound
-        //         }            
-        //     });
-        // });
     }
 
     
@@ -175,11 +176,12 @@ export class World {
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.speedY < 0 && !(enemy instanceof Endboss) ) {
+                if (this.character.speedY < 0 && !(enemy instanceof Endboss) && enemy.isAlive) {
+                    enemy.isAlive = false;
                     enemy.energy = 0;
-                } else if (this.character.y === 180 && enemy.type === "chicken" && !this.character.isAboveGround() ) {
+                    console.log("one")
+                } else if (enemy.type === "chicken" && !this.character.isAboveGround() && this.isFalling) {
                     {
-                        enemy.energy = 100;
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;
                         this.heathbar.setPercentage(

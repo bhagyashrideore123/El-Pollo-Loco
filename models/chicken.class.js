@@ -10,6 +10,7 @@ export class Chicken extends Movable {
     width = 80;
     type = "chicken";
     energy = 100;
+    isAlive = true;
     chickenImages = ImageHub.CHICKEN;
     speed = 0.1; // we make speed here different so taht it will look dynamic
     offset = {
@@ -26,7 +27,7 @@ export class Chicken extends Movable {
         IntervalHub.startInterval(this.animate, 1000 / 60);
         IntervalHub.startInterval(this.animateChicken, 1000 / 5);
         IntervalHub.startInterval(this.playChickenSound, 1000 / 5);
-        this.getRealFrame;
+       // this.getRealFrame;
     }
 
     animate = () => {
