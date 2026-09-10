@@ -1,6 +1,3 @@
-// let  level1;
-// function initLevel()
-
 import { Background } from "../../models/background.class.js";
 import { Chicken } from "../../models/chicken.class.js";
 import { Clouds } from "../../models/clouds.class.js";
@@ -10,8 +7,10 @@ import { Endboss } from "../../models/endboss.class.js";
 import { Level } from "../../models/level.class.js";
 import { MiniChicken } from "../../models/MiniChicken.class.js";
 
-// {
-export const level1 = new Level(
+export let  level1;
+export function initLevel()
+{
+    level1 = new Level(
     [
         new MiniChicken(),
         new Chicken(),
@@ -78,7 +77,7 @@ export const level1 = new Level(
         new Background("img/5_background/layers/1_first_layer/2.png"),
     ],
     [
-        // --- 30 Collectable Coins Coordinates (Max X: 2500) ---
+        
         new Collectable_coins(-200, 200),
         new Collectable_coins(-100, 170),
         new Collectable_coins(0, 200),
@@ -152,4 +151,4 @@ export const level1 = new Level(
         new Collectable_bottols(3040, 350),
     ],
 );
-// }
+}

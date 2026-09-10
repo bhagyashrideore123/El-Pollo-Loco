@@ -1,6 +1,7 @@
 import { Globals } from "../models/globals.class.js";
 import { Keyboard } from "../models/keyboard.class.js";
 import { World } from "../models/world.class.js";
+import { initLevel } from "./levels/level1.js";
 
 let world;
 
@@ -22,6 +23,7 @@ function init() {
 function startGame() {
     Globals.canvas.style.display = "block";
     Globals.startGameScreen.style.display = "none";
+    initLevel();
     Keyboard.keyboard_eventListener();
     world = new World(Globals.canvas);
 }
