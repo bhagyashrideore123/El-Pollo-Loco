@@ -31,7 +31,9 @@ export class AudioHub {
     static BOTTOL_SPLASH = new Sounds("audio/otherSounds/bottleBreak.mp3");
 
     static GAME = new Sounds("audio/game/gameStart.mp3");
-
+    static GAME_START_MUSIK = new Sounds("audio/game/game_Start_music.mp3");
+    static GAME_BACKGROUND_MUSIK = new Sounds("audio/game/game_BAckgorund_musik_option1.mp3");
+    
     static allSounds = [
         AudioHub.CHARACTER_WALK,
         AudioHub.CHARACTER_JUMP,
@@ -45,13 +47,14 @@ export class AudioHub {
         AudioHub.BOTTOL_COLLECT,
         AudioHub.BOTTOL_SPLASH,
         AudioHub.GAME,
+        AudioHub.GAME_BACKGROUND_MUSIK,
+        AudioHub.GAME_START_MUSIK
     ];
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(Sounds) {
         if (Sounds) {
             Sounds.file.volume = Globals.isMuted ? 0 : 0.5;
-
             if (this.isPlaying === true) {
                 return;
             } else if (Sounds.file.readyState > 0 || Sounds.isLoaded) {

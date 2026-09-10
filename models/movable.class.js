@@ -51,9 +51,6 @@ export class Movable extends Drawable {
     }
 
     isAboveGround(){
-        if (this.speedY < 0) {
-            this.isFalling = true;
-        }
         if(this.bottolFalling) //trwable obj should should always fall
         {
             return true;

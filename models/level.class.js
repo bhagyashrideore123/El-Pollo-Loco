@@ -2,7 +2,7 @@ export class Level {
     enemies;
     clouds;
     backgrounds;
-    levelEnd_x = 3000;
+    levelEnd_x = 3500;
     coins_total; 
     bottols_total; 
 

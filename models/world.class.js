@@ -142,7 +142,7 @@ export class World {
     checkEnemyBottol() {
         this.throwable_Object.forEach((bottle, bottleIndex) => {
 			this.level.enemies.forEach((enemy) => {
-				if (bottle.isColliding(enemy) && enemy.type == "chicken" && !enemy.isDead() && !bottle.isSplashing) {
+				if (bottle.isColliding(enemy) && enemy.type == "chicken" && enemy.isAlive && !bottle.isSplashing) {
                     Globals.enemyBottolHit = true;
 					enemy.hit();
                     bottle.splash();
@@ -168,24 +168,22 @@ export class World {
 			});
 		});
     }
-
     
-
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                if (this.character.speedY < 0 && !(enemy instanceof Endboss) && enemy.isAlive) {
+            if (this.character.isColliding(enemy) && enemy.isAlive && enemy.energy == 100) {
+                if (this.character.speedY < 0) {
                     enemy.isAlive = false;
                     enemy.energy = 0;
-                    console.log("one")
-                } else if (enemy.type === "chicken" && !this.character.isAboveGround() ) {
-                    {
+                } else if (enemy.type === "chicken" || enemy.type === "endboss" && !this.character.isAboveGround()) {
+                    {                      
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;
                         this.heathbar.setPercentage(
                             this.character.energy,
                             Images,
-                        );
+                        );                       
+                        
                     }
                 }
             }

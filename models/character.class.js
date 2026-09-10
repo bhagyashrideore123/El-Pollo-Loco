@@ -16,8 +16,7 @@ export class Character extends Movable {
     pepeDeadImages = ImageHub.PEPE.dead;
     pepeHitImages = ImageHub.PEPE.hurt;
     world;
-    speed = 3.5;
-    isFalling = false;
+    speed = 5;//3.5
 
     constructor() {
         super().loadImage(ImageHub.PEPE.ideal);
@@ -30,7 +29,7 @@ export class Character extends Movable {
         IntervalHub.startInterval(this.animate, 1000 / 60); //60 frames per second
         IntervalHub.startInterval(this.animateCharacter, 1000 / 10);
         IntervalHub.startInterval(this.playCharacterSound, 1000 / 60);
-        //this.getRealFrame;
+        this.getRealFrame;
     }
 
     animate = () => {
@@ -58,7 +57,7 @@ export class Character extends Movable {
             this.playAnimation(this.pepeJumpImages); //when in air show jump images
         } else {
             if (Keyboard.ArrowRight || Keyboard.ArrowLeft) {
-                if (this.x > 2500) {
+                if (this.x > 3000) {
                     Globals.endBossAlert = true; //this is to start endboss walking when pepe runs till 2500
                 } else {
                     Globals.endBossAlert = false;

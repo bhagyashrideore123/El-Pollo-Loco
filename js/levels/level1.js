@@ -27,7 +27,14 @@ export const level1 = new Level(
         new MiniChicken(),
         new Endboss(),
     ],
-    [new Clouds()],
+    [
+        new Clouds(),
+        new Clouds(),
+        new Clouds(),
+        new Clouds(),
+        new Clouds(),
+        new Clouds(),
+    ],
     [
         new Background("img/5_background/layers/air.png"),
         new Background("img/5_background/layers/3_third_layer/2.png"),
@@ -99,42 +106,50 @@ export const level1 = new Level(
         new Collectable_coins(2200, 190),
         new Collectable_coins(2300, 170),
         new Collectable_coins(2400, 200),
-        new Collectable_coins(2450, 150),
-        new Collectable_coins(2480, 180),
-        new Collectable_coins(2500, 200),
+        new Collectable_coins(2500, 150),
+        new Collectable_coins(2600, 180),
+        new Collectable_coins(2700, 200),
+        new Collectable_coins(2800, 160),
+        new Collectable_coins(2900, 190),
+        new Collectable_coins(3000, 170),
     ],
     [
-        // --- 30 Collectable Bottles Coordinates (Max X: 2500) ---
         new Collectable_bottols(-150, 350),
-       // new Collectable_bottols(-60, 350),
-        new Collectable_bottols(30, 350),
-       // new Collectable_bottols(120, 350),
-        //new Collectable_bottols(210, 350),
+        new Collectable_bottols(-60, 350),
+
+        new Collectable_bottols(120, 350),
+        new Collectable_bottols(210, 350),
         new Collectable_bottols(300, 350),
-        new Collectable_bottols(390, 350),
-        //new Collectable_bottols(480, 350),
+
+        new Collectable_bottols(480, 350),
         new Collectable_bottols(570, 350),
-        ////new Collectable_bottols(660, 350),
+
         new Collectable_bottols(750, 350),
-       // new Collectable_bottols(840, 350),
-        new Collectable_bottols(930, 350),
-       // new Collectable_bottols(1020, 350),
+        new Collectable_bottols(840, 350),
+
+        new Collectable_bottols(1020, 350),
         new Collectable_bottols(1110, 350),
-       // new Collectable_bottols(1200, 350),
+
         new Collectable_bottols(1290, 350),
-       // new Collectable_bottols(1380, 350),
-        new Collectable_bottols(1470, 350),
-       // new Collectable_bottols(1560, 350),
+        new Collectable_bottols(1380, 350),
+
+        new Collectable_bottols(1560, 350),
         new Collectable_bottols(1650, 350),
-     //   new Collectable_bottols(1740, 350),
+
         new Collectable_bottols(1830, 350),
-       // new Collectable_bottols(1920, 350),
-        new Collectable_bottols(2010, 350),
-       // new Collectable_bottols(2100, 350),
+        new Collectable_bottols(1920, 350),
+
+        new Collectable_bottols(2100, 350),
         new Collectable_bottols(2190, 350),
-        //new Collectable_bottols(2280, 350),
+
         new Collectable_bottols(2390, 350),
-       // new Collectable_bottols(2500, 350),
+        new Collectable_bottols(2500, 350),
+
+        new Collectable_bottols(2680, 350),
+        new Collectable_bottols(2770, 350),
+
+        new Collectable_bottols(2950, 350),
+        new Collectable_bottols(3040, 350),
     ],
 );
 // }

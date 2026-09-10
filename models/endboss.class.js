@@ -10,6 +10,7 @@ export class Endboss extends Movable {
     y = 100;
     firstContact = false;
     isDead = false;
+    isAlive = true;
     type = "endboss";
     energy = 100;
     offset = {
@@ -27,7 +28,7 @@ export class Endboss extends Movable {
         this.loadImages(this.endboss_Images.dead);
         this.x = 3000;
         this.runEndboss();
-       // this.getRealFrame;
+        this.getRealFrame;
     }
 
     runEndboss() {

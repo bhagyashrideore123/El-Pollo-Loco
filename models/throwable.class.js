@@ -29,7 +29,7 @@ export class Throwable extends Movable {
         this.y = _y;
         this.speedY = 20;
         IntervalHub.startInterval(this.throw, 1000 / 30);
-       // this.getRealFrame();
+        this.getRealFrame();
     }
 
     throw = () => {
@@ -43,9 +43,7 @@ export class Throwable extends Movable {
         if(this.isSplashing)return;
         this.isSplashing = true;
         AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
-       // Play splash frames sequentially or loop through it
-        setInterval(() => {
-            this.playAnimation(this.BottolSplash);
-        }, 1000 / 30);        
+        // Play splash frames sequentially or loop through it
+        this.playAnimation(this.BottolSplash);
     }
 }
