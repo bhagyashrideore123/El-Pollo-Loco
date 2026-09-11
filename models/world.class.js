@@ -145,11 +145,11 @@ export class World {
 				if (bottle.isColliding(enemy) && enemy.type == "chicken" && enemy.isAlive && !bottle.isSplashing) {
                     Globals.enemyBottolHit = true;
 					enemy.hit();
-                    bottle.splash();
-					AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
-					setTimeout(() => {
+                    setTimeout(() => {
                         this.throwable_Object.splice(bottleIndex, 1);
                     }, 300); // Adjust duration to match splash animation length
+                    bottle.splash();
+					
 				}
                 else if(bottle.isColliding(enemy) && enemy.type == "endboss" && !enemy.isDead && !bottle.isSplashing)
                 {
@@ -172,7 +172,7 @@ export class World {
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.isAlive && enemy.energy == 100) {
-                if (this.character.speedY < 0) {
+                if (this.character.speedY < 0 && !(this instanceof Endboss)) {
                     enemy.isAlive = false;
                     enemy.energy = 0;
                 } else if (enemy.type === "chicken" || enemy.type === "endboss" && !this.character.isAboveGround()) {

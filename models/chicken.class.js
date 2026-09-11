@@ -26,32 +26,34 @@ export class Chicken extends Movable {
         this.speed = this.speed + Math.random() * 0.15;
         IntervalHub.startInterval(this.animate, 1000 / 60);
         IntervalHub.startInterval(this.animateChicken, 1000 / 5);
-        IntervalHub.startInterval(this.playChickenSound, 1000 /60);
+        // IntervalHub.startInterval(this.playChickenSound, 1000 /5);
         this.getRealFrame;
     }
 
     animate = () => {
-        if (!this.isAlive ) {           
+        if (!this.isAlive || this.energy === 0) {           
             this.y += 1; // Make the dead chicken fall down slowly
         } else {
             this.moveLeft();
         }
     };
     animateChicken = () => {      
-        if (!this.isAlive) {
+        if (!this.isAlive || this.energy === 0) {
             this.loadImage(ImageHub.CHICKEN.dead); // Show dead image
+            AudioHub.playOne(AudioHub.CHICKEN_DEAD);
             Globals.isBottolSplash = true;
         } else {
             Globals.isBottolSplash = false;
             this.playAnimation(this.chickenImages.walk);
+            AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
         }
     };
 
-    playChickenSound=()=> {
-        if (!this.isAlive) {
-            AudioHub.playOne(AudioHub.CHICKEN_DEAD);
-        }else{
-            AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
-        }
-    }
+    // playChickenSound=()=> {
+    //     if (!this.isAlive || this.energy === 0) {
+            
+    //     }else{
+    //         AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
+    //     }
+    // }
 }

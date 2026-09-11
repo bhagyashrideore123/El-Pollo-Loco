@@ -24,14 +24,14 @@ export class MiniChicken extends Movable {
         this.loadImages(this.chickenImages.walk);
         this.x = 700 + Math.random() * 4000; //chickens start at 200px and then next cheickens will come after that.
         this.speed = this.speed + Math.random() * 0.25;
-       this.getRealFrame();
+        this.getRealFrame();
         IntervalHub.startInterval(this.animate, 1000 / 60);
         IntervalHub.startInterval(this.animateMiniChicken, 1000 / 10);
-        IntervalHub.startInterval(this.playMiniChickenSound, 1000 / 10);
+        // IntervalHub.startInterval(this.playMiniChickenSound, 1000 / 10);
     }
 
     animate = () => {
-        if (!this.isAlive) {
+        if (!this.isAlive || this.energy === 0) {
             this.y += 1; // Make the dead chicken fall down slowly
         } else {
             this.moveLeft();
@@ -39,20 +39,22 @@ export class MiniChicken extends Movable {
     };
 
     animateMiniChicken = () => {
-        if (!this.isAlive ) {
+        if (!this.isAlive || this.energy === 0) {
             Globals.isBottolSplash = true;
             this.loadImage(ImageHub.MINICHICKEN.dead); // Show dead image
+            AudioHub.playOne(AudioHub.MINICHICKEN_DEAD);
         } else {
             Globals.isBottolSplash = true;
             this.playAnimation(this.chickenImages.walk);
-        }
-    };
-
-    playMiniChickenSound = () => {
-        if (!this.isAlive ) {
-            AudioHub.playOne(AudioHub.MINICHICKEN_DEAD);
-        } else {
             AudioHub.stopOne(AudioHub.MINICHICKEN_DEAD);
         }
     };
+
+    // playMiniChickenSound = () => {
+    //     if (!this.isAlive || this.energy === 0) {
+    //        
+    //     } else {
+    //         AudioHub.stopOne(AudioHub.MINICHICKEN_DEAD);
+    //     }
+    // };
 }

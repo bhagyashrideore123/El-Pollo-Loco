@@ -81,7 +81,6 @@ export class Character extends Movable {
             } else if (Keyboard.SPACE) {
                 AudioHub.playOne(AudioHub.CHARACTER_JUMP);
             } else {
-                AudioHub.stopAll();
             }
         } catch (error) {
             console.log(error);

@@ -1,5 +1,6 @@
+
 export class Globals{
-    //static isBottolSplash = false;
+    static startNewGame = false;
     static endBossAlert = false;
     static chickenDead = false;
     static canThrow = false;
@@ -17,4 +18,6 @@ export class Globals{
     static restartBtn = document.getElementById("restart");
     static playAgainBtn = document.getElementById("playAgain");
     static soundBtn =  document.getElementById("soundBtn");
+
 }
+

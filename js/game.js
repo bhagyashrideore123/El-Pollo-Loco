@@ -1,3 +1,4 @@
+import { AudioHub } from "../models/audio.class.js";
 import { Globals } from "../models/globals.class.js";
 import { Keyboard } from "../models/keyboard.class.js";
 import { World } from "../models/world.class.js";
@@ -11,7 +12,7 @@ function init() {
     Globals.resControls.style.display = "none";
     Globals.lostScreen.style.display = "none";
     Globals.wonScreen.style.display = "none";
-    
+    startGameMusik();
     // Keyboard.keyboard_eventListener();
     // Globals.canvas = document.getElementById("canvas");
     // world = new World(Globals.canvas);
@@ -21,14 +22,17 @@ function init() {
 }
 
 function startGame() {
+   
     Globals.canvas.style.display = "block";
     Globals.startGameScreen.style.display = "none";
     initLevel();
     Keyboard.keyboard_eventListener();
     world = new World(Globals.canvas);
+    playBackgroundMusik();
 }
 
 function endGame() {
+    endGameMusik();
     Globals.canvas.style.display = "none";
     Globals.startGameScreen.style.display = "none";
 }
@@ -65,6 +69,25 @@ function toggleSound() {
     } else {
         soundBtn.innerHTML = "🔊";
     }
+}
+
+function startGameMusik()
+{
+    try{
+        AudioHub.playOne(AudioHub.GAME_START_MUSIK);
+    }catch(e)
+    {
+        console.log(e)
+    }
+    
+}
+function playBackgroundMusik()
+{
+    AudioHub.playOne(AudioHub.GAME_BACKGROUND_MUSIK);
+}
+function endGameMusik()
+{
+    AudioHub.playOne(AudioHub.GAME);
 }
 
 Globals.startBtn.addEventListener("click", startGame);

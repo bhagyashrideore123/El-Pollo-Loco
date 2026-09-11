@@ -38,14 +38,23 @@ export class Endboss extends Movable {
 
     animate = () => {
         this.moveLeft();
+        
     };
 
+    hit()
+    {
+        this.energy -= 5;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
+    }
+
     animateEndBoss = () => {
-        if (this.isDead) {
+        if (this.energy === 0) {
             this.playAnimation(this.endboss_Images.dead);
-            // setTimeout(() => {
-            //     //show you win screen
-            // }, 1000);
+            this.setWinScreen();
         } else if (this.isHurt()) {
             this.playAnimation(this.endboss_Images.hurt);
         } else {
@@ -55,4 +64,14 @@ export class Endboss extends Movable {
             }
         }
     };
+
+
+    setWinScreen()
+    {
+        setTimeout(() => {
+                Globals.wonScreen.style.display = "flex";
+                Globals.canvas.style.display = "none";
+                Globals.startNewGame = true;
+            }, 1000);
+    }
 }

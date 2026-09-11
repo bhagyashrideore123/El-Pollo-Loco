@@ -1,3 +1,4 @@
+import { AudioHub } from "./audio.class.js";
 import { Globals } from "./globals.class.js";
 
 export class Drawable {
@@ -80,7 +81,9 @@ export class Drawable {
             Globals.lostScreen.style.display = "flex";
             Globals.wonScreen.style.display = "none";
             Globals.fullscreen.style.display = "none";
+            Globals.soundBtn.style.display = "none";
         }, 2000);
+        AudioHub.playOne(AudioHub.GAME);
     }
 
     youWonScreen() {
@@ -92,6 +95,8 @@ export class Drawable {
             Globals.lostScreen.style.display = "none";
             Globals.wonScreen.style.display = "flex";
             Globals.fullscreen.style.display = "none";
+            Globals.soundBtn.style.display = "none";
         }, 2000);
+        AudioHub.playOne(AudioHub.GAME);//after won screen set
     }
 }
