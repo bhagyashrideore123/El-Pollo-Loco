@@ -9,6 +9,7 @@ import { MiniChicken } from "../../models/MiniChicken.class.js";
 
 export let level1;
 export function initLevel() {
+    Background.reset(); // fresh layout every time
     level1 = new Level(
         [
             new MiniChicken(),

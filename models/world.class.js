@@ -19,7 +19,9 @@ export class World {
     contex;
     canvas;
     keyboard;
+    running = true;
     camera_x = 0;
+    wasDPressed = false;
     heathbar = new Health_Statusbar();
     coinsbar = new Coins_Statusbar();
     bottlesbar = new Bottle_Statusbar();
@@ -27,6 +29,8 @@ export class World {
     throwable_Object = [];
     totalCoins = this.level.coins_total;
     totalBottols = this.level.bottols_total;
+    totalCoinsCount;
+    totalBottolsCount;
     collect_coins_array = [];
     collect_bottles_array = [];
     Sounds = AudioHub.ITEMSTOCOLLECT
@@ -35,6 +39,8 @@ export class World {
         this.canvas = _Canvas;
         this.contex = this.canvas.getContext("2d");
         this.keyboard = _keyboard;
+         this.totalCoinsCount = this.level.coins_total.length;    
+    this.totalBottolsCount = this.level.bottols_total.length; 
         this.draw();
         this.setWorld();
         IntervalHub.startInterval(this.run, 1000 / 60); 
@@ -47,6 +53,7 @@ export class World {
 
     //we have to execute this method only if our img is loaded.hence we call draw again inside it. (requestAnimationFrame)
     draw() {
+        if (!this.running) return;
         this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height); //clear canvas before drawing anything to reduce duplicate characters drawing
         this.contex.translate(this.camera_x, 0); //we are shifting x cordinator here to -100.verytime this excutes this line will add extra 100 px to x axis.
         this.objectsToMap(this.level.backgrounds);
@@ -115,8 +122,8 @@ export class World {
     }
 
     checkThrowObject() {
-        if (Keyboard.D && !Globals.canThrow && this.collect_bottles_array.length > 0) {//this canThrow checks on one press only one bottol should should throw
-                Globals.canThrow = false;
+        if (Keyboard.D && !this.wasDPressed  && this.collect_bottles_array.length > 0) {//this canThrow checks on one press only one bottol should should throw
+                this.wasDPressed  = true;
                 let bottle = new Throwable(
                     this.character.x + 100,
                     this.character.y + 100,
@@ -125,17 +132,17 @@ export class World {
                 this.collect_bottles_array.pop();
                 //update statausbar here..
                 let Images = ImageHub.STATUSBAR.bottles;
-                let collectedBottol = this.collect_bottles_array.length;
-                let totalBottols = this.level.bottols_total.length;
+               ;
                 this.updateStatusBars(
-                    collectedBottol,
-                    totalBottols,
+                   this.collect_bottles_array.length,
+                    this.totalBottolsCount,
                     Images,
                     this.bottlesbar,
-                );
-                setTimeout(() => {
-                    Globals.canThrow = true
-                }, 1000);                     
+                );                  
+        }
+        if(!Keyboard.D)
+        {
+            this.wasDPressed  = false; 
         }
     }
 
@@ -172,10 +179,10 @@ export class World {
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.isAlive && enemy.energy == 100) {
-                if (this.character.speedY < 0 && !(this instanceof Endboss)) {
+                if (this.character.speedY < 0 && !(enemy instanceof Endboss)) {
                     enemy.isAlive = false;
                     enemy.energy = 0;
-                } else if (enemy.type === "chicken" || enemy.type === "endboss" && !this.character.isAboveGround()) {
+                } else if (enemy.type === "chicken" || enemy instanceof Endboss && !this.character.isAboveGround()) {
                     {                      
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;
@@ -197,10 +204,10 @@ export class World {
                 this.collect_coins_array.push(coin);
                 this.totalCoins.splice(index, 1);
                 let Images = ImageHub.STATUSBAR.coins;
-                let collectedCoins = this.collect_coins_array.length;
+              
                 this.updateStatusBars(
-                    collectedCoins,
-                    this.totalCoins.length,
+                   this.collect_coins_array.length,
+                    this.totalCoinsCount,
                     Images,
                     this.coinsbar,
                 );
@@ -218,10 +225,10 @@ export class World {
                 this.collect_bottles_array.push(bottle);
                 this.totalBottols.splice(index, 1);
                 let Image = ImageHub.STATUSBAR.bottles;
-                let collectedBottols = this.collect_bottles_array.length;
+               
                 this.updateStatusBars(
-                    collectedBottols,
-                    this.totalBottols.length,
+                     this.collect_bottles_array.length,
+                    this.totalBottolsCount,
                     Image,
                     this.bottlesbar,
                 );

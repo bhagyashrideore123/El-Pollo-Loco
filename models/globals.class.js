@@ -3,7 +3,6 @@ export class Globals{
     static startNewGame = false;
     static endBossAlert = false;
     static chickenDead = false;
-    static canThrow = false;
     static enemyBottolHit = false;
     static YouLoose = false;
     static YouWin = false;

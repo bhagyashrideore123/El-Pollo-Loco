@@ -27,7 +27,6 @@ export class Keyboard {
                 Keyboard.ArrowDown = true;
             }
             if (event.keyCode == 68) {
-                Globals.canThrow = false;
                 Keyboard.D = true;
             }
         });
@@ -50,7 +49,6 @@ export class Keyboard {
                 Keyboard.ArrowDown = false;
             }
             if (event.keyCode == 68) {
-                Globals.canThrow = true;
                 Keyboard.D = false;
             }
         });

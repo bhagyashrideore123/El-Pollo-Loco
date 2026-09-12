@@ -45,5 +45,6 @@ export class Throwable extends Movable {
         AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
         // Play splash frames sequentially or loop through it
         this.playAnimation(this.BottolSplash);
+        
     }
 }

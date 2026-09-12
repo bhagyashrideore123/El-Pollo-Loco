@@ -19,6 +19,7 @@ export class Endboss extends Movable {
         bottom: 30,
         left: 20,
     };
+    hasWon = false;
 
     constructor() {
         super().loadImage(this.endboss_Images.walk[0]);
@@ -43,18 +44,22 @@ export class Endboss extends Movable {
 
     hit()
     {
-        this.energy -= 5;
-            if (this.energy < 0) {
-                this.energy = 0;
-            } else {
-                this.lastHit = new Date().getTime();
-            }
+         this.energy -= 20;
+    if (this.energy < 0) {
+        this.energy = 0;
+    } else {
+        this.lastHit = new Date().getTime();
+    }
     }
 
     animateEndBoss = () => {
         if (this.energy === 0) {
             this.playAnimation(this.endboss_Images.dead);
-            this.setWinScreen();
+
+            if (!this.hasWon) {
+                this.hasWon = true;
+                this.youWonScreen(); 
+        }
         } else if (this.isHurt()) {
             this.playAnimation(this.endboss_Images.hurt);
         } else {
@@ -64,14 +69,4 @@ export class Endboss extends Movable {
             }
         }
     };
-
-
-    setWinScreen()
-    {
-        setTimeout(() => {
-                Globals.wonScreen.style.display = "flex";
-                Globals.canvas.style.display = "none";
-                Globals.startNewGame = true;
-            }, 1000);
-    }
 }

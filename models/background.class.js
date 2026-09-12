@@ -6,7 +6,7 @@ export class Background extends Movable{
     width = 720;
     height = 480;
     static xPOs = -719;
-    static turn =0;
+    static turn = 0;
 
     constructor(_imagePath){
         if(Background.turn === 4)
@@ -18,5 +18,9 @@ export class Background extends Movable{
 
         this.x = Background.xPOs;
         Background.turn++;
+    }
+    static reset() {
+        Background.xPOs = -719;
+        Background.turn = 0;
     }
 }
