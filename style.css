@@ -132,7 +132,10 @@ button:hover{
     padding: 10px 20px;
 }
 
-
+.resControl{
+width: 60px;
+height: 60px;
+}
 .responsiveControls{
     display: flex;
     justify-content: space-between;

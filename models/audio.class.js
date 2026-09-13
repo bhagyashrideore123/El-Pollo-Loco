@@ -8,6 +8,9 @@ class Sounds {
 
     constructor(_file) {
         this.file = new Audio(_file);
+         this.file.addEventListener("ended", () => { //the flag clears itself once a non-looping clip ends
+        this.isPlaying = false;
+    });
     }
 }
 
@@ -52,16 +55,16 @@ export class AudioHub {
     ];
 
     // Spielt eine einzelne Audiodatei ab
-    static playOne(Sounds) {
-        if (Sounds) {
-            Sounds.file.volume = Globals.isMuted ? 0 : 0.05;
-            if (this.isPlaying === true) {
+    static playOne(Sound) {
+        if (Sound) {
+            Sound.file.volume = Globals.isMuted ? 0 : 0.02;
+            if (Sound.isPlaying === true) {
                 return;
-            } else if (Sounds.file.readyState > 0 || Sounds.isLoaded) {
-                Sounds.file.currentTime = 0;
-                Sounds.isLoaded = true;
-                Sounds.file.play();
-                Sounds.isPlaying = true;
+            } else if (Sound.file.readyState > 0 || Sound.isLoaded) {
+                Sound.file.currentTime = 0;
+                Sound.isLoaded = true;
+                Sound.file.play();
+                Sound.isPlaying = true;
             }
         } else {
             console.log("sound not loaded ");
@@ -86,4 +89,9 @@ export class AudioHub {
         }
     }
 
+static applyMuteState() {
+    AudioHub.allSounds.forEach((sound) => {
+        sound.file.volume = Globals.isMuted ? 0 : 0.05;
+    });
+}
 }

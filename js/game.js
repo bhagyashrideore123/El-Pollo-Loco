@@ -20,16 +20,20 @@ function init() {
 function startGame() {
     IntervalHub.stopAllIntervals();// kill every interval from the previous game/world
     if (world) world.running = false; // stop the old draw loop before creating a new World
+    AudioHub.playOne(AudioHub.GAME);
     Globals.canvas.style.display = "block";
     Globals.startGameScreen.style.display = "none";
     Globals.lostScreen.style.display = "none";
     Globals.wonScreen.style.display = "none";
+    Globals.soundBtn.style.display = "flex";
+    Globals.fullscreen.style.display = "flex";
     initLevel();
     if (!keyboardInitialized) {
         Keyboard.keyboard_eventListener();
+        Keyboard.bindBtnPressEvents(); // ← attach the touch controls
         keyboardInitialized = true;
     }
-    world = new World(Globals.canvas);
+    world = new World(Globals.canvas);    
     playBackgroundMusik();
 }
 
@@ -42,6 +46,7 @@ function endGame() {
 function fullscreenStart() {
     let fullscreen = Globals.fullscreen;
     enterFullScreen(fullscreen);
+    Globals.fullscreen.blur();
 }
 
 function enterFullScreen(element) {
@@ -56,21 +61,24 @@ function enterFullScreen(element) {
     }
 }
 
-function checkScreen() {
-    if (window.matchMedia("(hover: none)").matches) {
+function checkScreen(mql) {//window.matchMedia() returns a MediaQueryList object, and that object supports a change event
+    if (mql.matches) {
         Globals.resControls.style.display = "flex";
     } else {
         Globals.resControls.style.display = "none";
     }
 }
+const hoverCheck = window.matchMedia("(hover: none)");
+checkScreen(hoverCheck); // run once on load
+hoverCheck.addEventListener("change", () => checkScreen(hoverCheck)); // check live as well
 
 function toggleSound() {
-    Globals.isMuted = !Globals.isMuted;
-    if (Globals.isMuted) {
-        soundBtn.innerHTML = "🔇";
-    } else {
-        soundBtn.innerHTML = "🔊";
-    }
+   
+        Globals.isMuted = !Globals.isMuted;
+        Globals.soundBtn.innerHTML = Globals.isMuted ? "🔇" : "🔊";
+        AudioHub.applyMuteState();
+        Globals.soundBtn.blur(); // give up focus so Space (jump) doesn't re-trigger this button
+  
 }
 
 function startGameMusik() {

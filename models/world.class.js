@@ -40,9 +40,9 @@ export class World {
         this.contex = this.canvas.getContext("2d");
         this.keyboard = _keyboard;
          this.totalCoinsCount = this.level.coins_total.length;    
-    this.totalBottolsCount = this.level.bottols_total.length; 
-        this.draw();
-        this.setWorld();
+    this.totalBottolsCount = this.level.bottols_total.length;
+      this.setWorld(); 
+        this.draw();      
         IntervalHub.startInterval(this.run, 1000 / 60); 
     }
 
@@ -112,6 +112,11 @@ export class World {
 
     setWorld() {
         this.character.world = this; //we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
+        this.level.enemies.forEach((enemy) => {
+        if (enemy instanceof Endboss) {
+            enemy.character = this.character;
+        }
+    });
     }
 
     checkCollision() {

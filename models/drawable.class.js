@@ -26,6 +26,9 @@ export class Drawable {
     }
 
     draw(contex) {
+        if (!this.img || !this.img.complete || this.img.naturalWidth === 0) {
+        return; // skip this frame rather than throwing
+    }
         try {
             contex.drawImage(this.img, this.x, this.y, this.width, this.height); //here we give movable object to canvas.
         } catch (e) {
@@ -82,8 +85,12 @@ export class Drawable {
             Globals.wonScreen.style.display = "none";
             Globals.fullscreen.style.display = "none";
             Globals.soundBtn.style.display = "none";
+              AudioHub.playOne(AudioHub.GAME);
+        AudioHub.stopOne(AudioHub.GAME_BACKGROUND_MUSIK);
+        AudioHub.stopOne(AudioHub.CHARACTER_WALK);
         }, 2000);
-        AudioHub.playOne(AudioHub.GAME);
+      
+
     }
 
     youWonScreen() {
@@ -98,5 +105,7 @@ export class Drawable {
             Globals.soundBtn.style.display = "none";
         }, 2000);
         AudioHub.playOne(AudioHub.GAME);//after won screen set
+        AudioHub.stopOne(AudioHub.GAME_BACKGROUND_MUSIK);
+        AudioHub.stopOne(AudioHub.CHARACTER_WALK);
     }
 }

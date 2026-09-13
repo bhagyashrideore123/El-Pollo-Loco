@@ -9,6 +9,47 @@ export class Keyboard {
     static ArrowDown = false;
     static D = false;
 
+    constructor()
+    {
+        Keyboard.bindBtnPressEvents();
+    }
+
+    static bindBtnPressEvents()
+    {
+        document.getElementById('goBack').addEventListener('touchstart',(e)=>{
+            e.preventDefault();
+            Keyboard.ArrowLeft = true;
+        });
+        document.getElementById('goBack').addEventListener('touchend',(e)=>{
+            e.preventDefault();
+            Keyboard.ArrowLeft = false;
+        });
+        document.getElementById('goForward').addEventListener('touchstart',(e)=>{
+            e.preventDefault();
+            Keyboard.ArrowRight = true;
+        });
+        document.getElementById('goForward').addEventListener('touchend',(e)=>{
+            e.preventDefault();
+            Keyboard.ArrowRight = false;
+        });
+        document.getElementById('jump').addEventListener('touchstart',(e)=>{
+            e.preventDefault();
+            Keyboard.SPACE = true;
+        });
+        document.getElementById('jump').addEventListener('touchend',(e)=>{
+            e.preventDefault();
+            Keyboard.SPACE = false;
+        });
+        document.getElementById('throwBottol').addEventListener('touchstart',(e)=>{
+            e.preventDefault();
+            Keyboard.D = true;
+        });
+        document.getElementById('throwBottol').addEventListener('touchend',(e)=>{
+            e.preventDefault();
+            Keyboard.D = false;
+        });
+    }
+
     static keyboard_eventListener() {
         window.addEventListener("keydown", (event) => {
             if (event.keyCode == 37) {
