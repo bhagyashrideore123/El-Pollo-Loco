@@ -16,13 +16,13 @@
         <h1>El POLLO LOCO</h1>
         <h2>Level 1</h2>
     </div>
-    <div id="gameContainer" style="position: relative; display: inline-block; max-width: 720px; width: 100%;">
+    <div id="gameContainer" class="gameConrolWrapper">
     
     <!-- Sound and Fullscreen Buttons -->
-    <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px; z-index: 1000;">
-        <button id="fullscreenBtn" class="fullscreenBtn">⛶</button>
-        <button id="soundBtn" class="soundBtn">🔇</button>
-    </div>
+    <div class="gameControls">
+    <button id="fullscreenBtn" class="fullscreenBtn">⛶</button>
+    <button id="soundBtn" class="soundBtn">🔇</button>
+</div>
 
     <!-- Start Screen -->
     <div id="startScreen" class="start_container">
@@ -40,12 +40,12 @@
     <!-- yopu lost screen -->
     <div id="lostScreen" class="flexClass">
         <img class="youLostImg" src="img/You won, you lost/You lost.png" alt="you_lost_screen">
-        <button id="restart">Restart Game</button>
+        <button id="restart">Restart >></button>
     </div>
     <!-- you won screen -->
     <div id="wonScreen" class="flexClass">
         <img class="youWonImg" src="img/You won, you lost/You won A.png" alt="you_win_screen">
-        <button id="playAgain">Play Again</button>
+        <button id="playAgain">Play Again >></button>
     </div>
 
     <div class="responsiveControls" id="responsiveKontrols">

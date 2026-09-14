@@ -85,11 +85,12 @@ export class Drawable {
             Globals.wonScreen.style.display = "none";
             Globals.fullscreen.style.display = "none";
             Globals.soundBtn.style.display = "none";
-              AudioHub.playOne(AudioHub.GAME);
-        AudioHub.stopOne(AudioHub.GAME_BACKGROUND_MUSIK);
-        AudioHub.stopOne(AudioHub.CHARACTER_WALK);
+            AudioHub.playOne(AudioHub.GAME);
+            AudioHub.stopOne(AudioHub.GAME_BACKGROUND_MUSIK);
+            AudioHub.stopOne(AudioHub.CHARACTER_WALK);
+            AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
+            AudioHub.stopOne(AudioHub.CHARACTER_DEAD);
         }, 2000);
-      
 
     }
 
@@ -107,5 +108,6 @@ export class Drawable {
         AudioHub.playOne(AudioHub.GAME);//after won screen set
         AudioHub.stopOne(AudioHub.GAME_BACKGROUND_MUSIK);
         AudioHub.stopOne(AudioHub.CHARACTER_WALK);
+        AudioHub.stopOne(AudioHub.CHICKEN_DEAD);
     }
 }

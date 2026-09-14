@@ -115,34 +115,87 @@ h2{
     gap: 50px;
 
 }
-
+a.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
 button{
-    border: none;
-    background: none;
-    font-size: clamp(2rem, 4vw, 50px);
+   border: 2px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    font-size: clamp(1.5rem, 4vw, 3rem); /* was up to 50px — a bit large */
     color: white;
-    padding: 10px 20px;
+    padding: 10px 24px;
     cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 button:hover{
-    border: 2px solid white;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 10px 20px;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+button:focus-visible{
+    outline: 3px solid #ffd54a; /* clear focus ring for keyboard/touch, distinct from hover */
+    outline-offset: 2px;
 }
 
-.resControl{
+button:active{
+    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.35);
+}
+/* .resControl{
 width: 60px;
 height: 60px;
-}
-.responsiveControls{
+} */
+/* .responsiveControls{
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 720px;
     align-items: center;
     padding: 10px;
+} */
+.resControl {
+    width: 56px;
+    height: 56px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;           /* forces every icon into the same circular shape */
+    object-fit: contain;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* removes the ugly gray flash on mobile tap */
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;   /* prevents double-tap-zoom delay on the buttons */
+    transition: background 0.12s ease, transform 0.08s ease, border-color 0.12s ease;
+}
+.resControl:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: #ffd54a;
+}
+/* Pressed/active feedback — important on touch since there's no hover state */
+.resControl:active {
+    transform: scale(0.9);
+    background: rgba(255, 213, 74, 0.35);
+    border-color: #ffd54a;
+}
+.responsiveControls{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 720px;
+    align-items: center;
+    padding: 14px 20px;
+    margin-top: 10px;
+}
+.responsiveControls > div {
+    display: flex;
+    gap: 14px;
 }
 #gameContainer {
     position: relative;
@@ -151,7 +204,14 @@ height: 60px;
     align-items: center;
     justify-content: center;
 }
-
+.gameControls {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
 .fullscreenBtn, .soundBtn {
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -185,6 +245,13 @@ height: 60px;
         height: 100dvh;
         width: auto;
     }   
+    .resControl {
+        width: 52px;
+        height: 52px;
+    }
+    .responsiveControls > div {
+        gap: 10px;
+    }
 }
 
 @media only screen and (max-width:480){

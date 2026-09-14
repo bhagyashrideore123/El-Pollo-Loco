@@ -57,7 +57,7 @@ export class AudioHub {
     // Spielt eine einzelne Audiodatei ab
     static playOne(Sound) {
         if (Sound) {
-            Sound.file.volume = Globals.isMuted ? 0 : 0.02;
+            Sound.file.volume = Globals.isMuted ? 0 : 0.05;
             if (Sound.isPlaying === true) {
                 return;
             } else if (Sound.file.readyState > 0 || Sound.isLoaded) {
