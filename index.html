@@ -11,31 +11,32 @@
 </head>
 
 <body>
-  
+
     <div class="wrapper">
         <h1>El POLLO LOCO</h1>
         <h2>Level 1</h2>
     </div>
     <div id="gameContainer" class="gameConrolWrapper">
-    
-    <!-- Sound and Fullscreen Buttons -->
-    <div class="gameControls">
-    <button id="fullscreenBtn" class="fullscreenBtn">⛶</button>
-    <button id="soundBtn" class="soundBtn">🔇</button>
-</div>
 
-    <!-- Start Screen -->
-    <div id="startScreen" class="start_container">
-        <img class="startScreenImg" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="start_screen_of_game">
-        <button id="startGameBtn">Start >></button>
+        <!-- Sound and Fullscreen Buttons -->
+        <div class="gameControls">
+            <button id="fullscreenBtn" class="fullscreenBtn">⛶</button>
+            <button id="soundBtn" class="soundBtn">🔇</button>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="start_container">
+            <img class="startScreenImg" src="img/9_intro_outro_screens/start/startscreen_1.png"
+                alt="start_screen_of_game">
+            <button id="startGameBtn">Start >></button>
+        </div>
+
+        <!-- Canvas Container -->
+        <div id="canvasStyle">
+            <canvas id="canvas" width="720" height="480"></canvas>
+        </div>
+
     </div>
-
-    <!-- Canvas Container -->
-    <div id="canvasStyle">
-        <canvas id="canvas" width="720" height="480"></canvas>
-    </div>
-
-</div>
 
     <!-- yopu lost screen -->
     <div id="lostScreen" class="flexClass">
@@ -54,7 +55,7 @@
             <img class="resControl" id="goForward" src="img/responsiveControlsImages/goForward.svg" alt="run_button">
         </div>
         <div>
-            <img class="resControl"  id="jump" src="img/responsiveControlsImages/goJump.svg" alt="jump_button">
+            <img class="resControl" id="jump" src="img/responsiveControlsImages/goJump.svg" alt="jump_button">
             <img class="resControl" id="throwBottol" src="img/responsiveControlsImages/bottol.svg" alt="throw_bottol">
         </div>
     </div>

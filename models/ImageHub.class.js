@@ -1,5 +1,4 @@
-export class ImageHub  {
-
+export class ImageHub {
     static CHICKEN = {
         walk: [
             "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -10,7 +9,7 @@ export class ImageHub  {
         dead: ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"],
     };
 
-    static MINICHICKEN ={
+    static MINICHICKEN = {
         walk: [
             "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
             "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
@@ -18,7 +17,7 @@ export class ImageHub  {
         ],
         ideal: ["img/3_enemies_chicken/chicken_small/1_walk/1_w.png"],
         dead: ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"],
-    }
+    };
 
     static BACKGROUNDS = {
         layer_1: [
@@ -75,7 +74,7 @@ export class ImageHub  {
     };
 
     static COIN = ["img/8_coin/coin_1.png"];
-    static BOTTOL = ["img/6_salsa_bottle/2_salsa_bottle_on_ground.png"]
+    static BOTTOL = ["img/6_salsa_bottle/2_salsa_bottle_on_ground.png"];
 
     static BOSS = {
         walk: [
@@ -104,18 +103,16 @@ export class ImageHub  {
             "img/4_enemie_boss_chicken/3_attack/G19.png",
             "img/4_enemie_boss_chicken/3_attack/G20.png",
         ],
-        hurt:[
+        hurt: [
             "img/4_enemie_boss_chicken/4_hurt/G21.png",
             "img/4_enemie_boss_chicken/4_hurt/G22.png",
             "img/4_enemie_boss_chicken/4_hurt/G23.png",
-
         ],
-        dead:[
+        dead: [
             "img/4_enemie_boss_chicken/5_dead/G24.png",
             "img/4_enemie_boss_chicken/5_dead/G25.png",
             "img/4_enemie_boss_chicken/5_dead/G26.png",
-
-        ]
+        ],
     };
 
     static STATUSBAR = {
@@ -143,14 +140,14 @@ export class ImageHub  {
             "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
             "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
         ],
-        endboss:[
+        endboss: [
             "img/7_statusbars/2_statusbar_endboss/green/green0.png",
             "img/7_statusbars/2_statusbar_endboss/green/green20.png",
             "img/7_statusbars/2_statusbar_endboss/green/green40.png",
             "img/7_statusbars/2_statusbar_endboss/green/green60.png",
             "img/7_statusbars/2_statusbar_endboss/green/green80.png",
-            "img/7_statusbars/2_statusbar_endboss/green/green100.png"
-        ]
+            "img/7_statusbars/2_statusbar_endboss/green/green100.png",
+        ],
     };
 
     static SALSABOTTOL = {
@@ -172,8 +169,7 @@ export class ImageHub  {
     };
 
     static ENDGAME = {
-        youLose:["img/You won, you lost/You lost.png"],
-        youWin:["img/You won, you lost/You won A.png"]
-
-    }
+        youLose: ["img/You won, you lost/You lost.png"],
+        youWin: ["img/You won, you lost/You won A.png"],
+    };
 }

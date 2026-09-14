@@ -16,7 +16,7 @@ export class Character extends Movable {
     pepeDeadImages = ImageHub.PEPE.dead;
     pepeHitImages = ImageHub.PEPE.hurt;
     world;
-    speed = 5;//3.5
+    speed = 5;//chnaged to 5 from 3.5 to speed up character
 
     constructor() {
         super().loadImage(ImageHub.PEPE.ideal);
@@ -83,7 +83,7 @@ export class Character extends Movable {
             } else {
             }
         } catch (error) {
-            console.log(error);
+           
         }
     };
 

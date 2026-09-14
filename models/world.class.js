@@ -13,7 +13,7 @@ import { Keyboard } from "./keyboard.class.js";
 import { Throwable } from "./throwable.class.js";
 
 export class World {
-    character = new Character
+    character = new Character();
     level = level1;
     isbottolThrow = false;
     contex;
@@ -33,17 +33,17 @@ export class World {
     totalBottolsCount;
     collect_coins_array = [];
     collect_bottles_array = [];
-    Sounds = AudioHub.ITEMSTOCOLLECT
+    Sounds = AudioHub.ITEMSTOCOLLECT;
 
     constructor(_Canvas, _keyboard) {
         this.canvas = _Canvas;
         this.contex = this.canvas.getContext("2d");
         this.keyboard = _keyboard;
-         this.totalCoinsCount = this.level.coins_total.length;    
-    this.totalBottolsCount = this.level.bottols_total.length;
-      this.setWorld(); 
-        this.draw();      
-        IntervalHub.startInterval(this.run, 1000 / 60); 
+        this.totalCoinsCount = this.level.coins_total.length;
+        this.totalBottolsCount = this.level.bottols_total.length;
+        this.setWorld();
+        this.draw();
+        IntervalHub.startInterval(this.run, 1000 / 60);
     }
 
     run = () => {
@@ -113,10 +113,10 @@ export class World {
     setWorld() {
         this.character.world = this; //we added this so that chracter should have instance of keyboard events always. hence we have added same world instance to character.
         this.level.enemies.forEach((enemy) => {
-        if (enemy instanceof Endboss) {
-            enemy.character = this.character;
-        }
-    });
+            if (enemy instanceof Endboss) {
+                enemy.character = this.character;
+            }
+        });
     }
 
     checkCollision() {
@@ -127,75 +127,89 @@ export class World {
     }
 
     checkThrowObject() {
-        if (Keyboard.D && !this.wasDPressed  && this.collect_bottles_array.length > 0) {//this canThrow checks on one press only one bottol should should throw
-                this.wasDPressed  = true;
-                let bottle = new Throwable(
-                    this.character.x + 100,
-                    this.character.y + 100,
-                );
-                this.throwable_Object.push(bottle);
-                this.collect_bottles_array.pop();
-                //update statausbar here..
-                let Images = ImageHub.STATUSBAR.bottles;
-               ;
-                this.updateStatusBars(
-                   this.collect_bottles_array.length,
-                    this.totalBottolsCount,
-                    Images,
-                    this.bottlesbar,
-                );                  
+        if (
+            Keyboard.D &&
+            !this.wasDPressed &&
+            this.collect_bottles_array.length > 0
+        ) {
+            //this canThrow checks on one press only one bottol should should throw
+            this.wasDPressed = true;
+            let bottle = new Throwable(
+                this.character.x + 100,
+                this.character.y + 100,
+            );
+            this.throwable_Object.push(bottle);
+            this.collect_bottles_array.pop();
+            //update statausbar here..
+            let Images = ImageHub.STATUSBAR.bottles;
+            this.updateStatusBars(
+                this.collect_bottles_array.length,
+                this.totalBottolsCount,
+                Images,
+                this.bottlesbar,
+            );
         }
-        if(!Keyboard.D)
-        {
-            this.wasDPressed  = false; 
+        if (!Keyboard.D) {
+            this.wasDPressed = false;
         }
     }
 
     checkEnemyBottol() {
         this.throwable_Object.forEach((bottle, bottleIndex) => {
-			this.level.enemies.forEach((enemy) => {
-				if (bottle.isColliding(enemy) && enemy.type == "chicken" && enemy.isAlive && !bottle.isSplashing) {
+            this.level.enemies.forEach((enemy) => {
+                if (
+                    bottle.isColliding(enemy) &&
+                    enemy.type == "chicken" &&
+                    enemy.isAlive &&
+                    !bottle.isSplashing
+                ) {
                     Globals.enemyBottolHit = true;
-					enemy.hit();
+                    enemy.hit();
                     setTimeout(() => {
                         this.throwable_Object.splice(bottleIndex, 1);
                     }, 300); // Adjust duration to match splash animation length
                     bottle.splash();
-					
-				}
-                else if(bottle.isColliding(enemy) && enemy.type == "endboss" && !enemy.isDead && !bottle.isSplashing)
-                {
+                } else if (
+                    bottle.isColliding(enemy) &&
+                    enemy.type == "endboss" &&
+                    !enemy.isDead &&
+                    !bottle.isSplashing
+                ) {
                     enemy.hit();
                     let Images = ImageHub.STATUSBAR.endboss;
-                    this.endbossBar.setPercentage(
-                        enemy.energy,
-                        Images,
-                    );
+                    this.endbossBar.setPercentage(enemy.energy, Images);
                     bottle.splash();
                     AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
                     setTimeout(() => {
                         this.throwable_Object.splice(bottleIndex, 1);
                     }, 300); // Adjust duration to match splash animation length
                 }
-			});
-		});
+            });
+        });
     }
-    
+
     checkEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && enemy.isAlive && enemy.energy == 100) {
+            if (
+                this.character.isColliding(enemy) &&
+                enemy.isAlive &&
+                enemy.energy == 100
+            ) {
                 if (this.character.speedY < 0 && !(enemy instanceof Endboss)) {
                     enemy.isAlive = false;
                     enemy.energy = 0;
-                } else if (enemy.type === "chicken" || enemy instanceof Endboss && !this.character.isAboveGround()) {
-                    {                      
+                } else if (
+                    enemy.type === "chicken" ||
+                    (enemy instanceof Endboss &&
+                        !this.character.isAboveGround())
+                ) {
+                    {
                         this.character.hit();
                         let Images = ImageHub.STATUSBAR.health;
                         this.heathbar.setPercentage(
                             this.character.energy,
                             Images,
-                        );                       
-                        
+                        );
                     }
                 }
             }
@@ -209,16 +223,16 @@ export class World {
                 this.collect_coins_array.push(coin);
                 this.totalCoins.splice(index, 1);
                 let Images = ImageHub.STATUSBAR.coins;
-              
+
                 this.updateStatusBars(
-                   this.collect_coins_array.length,
+                    this.collect_coins_array.length,
                     this.totalCoinsCount,
                     Images,
                     this.coinsbar,
                 );
-            setTimeout(() => {
-                AudioHub.stopOne(AudioHub.COIN_COLLECT);
-            }, 500);
+                setTimeout(() => {
+                    AudioHub.stopOne(AudioHub.COIN_COLLECT);
+                }, 500);
             }
         });
     }
@@ -230,9 +244,9 @@ export class World {
                 this.collect_bottles_array.push(bottle);
                 this.totalBottols.splice(index, 1);
                 let Image = ImageHub.STATUSBAR.bottles;
-               
+
                 this.updateStatusBars(
-                     this.collect_bottles_array.length,
+                    this.collect_bottles_array.length,
                     this.totalBottolsCount,
                     Image,
                     this.bottlesbar,

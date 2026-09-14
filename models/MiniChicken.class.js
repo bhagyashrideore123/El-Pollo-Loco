@@ -27,7 +27,6 @@ export class MiniChicken extends Movable {
         this.getRealFrame();
         IntervalHub.startInterval(this.animate, 1000 / 60);
         IntervalHub.startInterval(this.animateMiniChicken, 1000 / 10);
-        // IntervalHub.startInterval(this.playMiniChickenSound, 1000 / 10);
     }
 
     animate = () => {
@@ -49,12 +48,4 @@ export class MiniChicken extends Movable {
             AudioHub.stopOne(AudioHub.MINICHICKEN_DEAD);
         }
     };
-
-    // playMiniChickenSound = () => {
-    //     if (!this.isAlive || this.energy === 0) {
-    //        
-    //     } else {
-    //         AudioHub.stopOne(AudioHub.MINICHICKEN_DEAD);
-    //     }
-    // };
 }

@@ -9,45 +9,53 @@ export class Keyboard {
     static ArrowDown = false;
     static D = false;
 
-    constructor()
-    {
+    constructor() {
         Keyboard.bindBtnPressEvents();
     }
 
-    static bindBtnPressEvents()
-    {
-        document.getElementById('goBack').addEventListener('touchstart',(e)=>{
-            e.preventDefault();
-            Keyboard.ArrowLeft = true;
-        });
-        document.getElementById('goBack').addEventListener('touchend',(e)=>{
+    static bindBtnPressEvents() {
+        document
+            .getElementById("goBack")
+            .addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                Keyboard.ArrowLeft = true;
+            });
+        document.getElementById("goBack").addEventListener("touchend", (e) => {
             e.preventDefault();
             Keyboard.ArrowLeft = false;
         });
-        document.getElementById('goForward').addEventListener('touchstart',(e)=>{
-            e.preventDefault();
-            Keyboard.ArrowRight = true;
-        });
-        document.getElementById('goForward').addEventListener('touchend',(e)=>{
-            e.preventDefault();
-            Keyboard.ArrowRight = false;
-        });
-        document.getElementById('jump').addEventListener('touchstart',(e)=>{
+        document
+            .getElementById("goForward")
+            .addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                Keyboard.ArrowRight = true;
+            });
+        document
+            .getElementById("goForward")
+            .addEventListener("touchend", (e) => {
+                e.preventDefault();
+                Keyboard.ArrowRight = false;
+            });
+        document.getElementById("jump").addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.SPACE = true;
         });
-        document.getElementById('jump').addEventListener('touchend',(e)=>{
+        document.getElementById("jump").addEventListener("touchend", (e) => {
             e.preventDefault();
             Keyboard.SPACE = false;
         });
-        document.getElementById('throwBottol').addEventListener('touchstart',(e)=>{
-            e.preventDefault();
-            Keyboard.D = true;
-        });
-        document.getElementById('throwBottol').addEventListener('touchend',(e)=>{
-            e.preventDefault();
-            Keyboard.D = false;
-        });
+        document
+            .getElementById("throwBottol")
+            .addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                Keyboard.D = true;
+            });
+        document
+            .getElementById("throwBottol")
+            .addEventListener("touchend", (e) => {
+                e.preventDefault();
+                Keyboard.D = false;
+            });
     }
 
     static keyboard_eventListener() {
@@ -72,8 +80,7 @@ export class Keyboard {
             }
         });
 
-    window.addEventListener("keyup", (event) => {
-
+        window.addEventListener("keyup", (event) => {
             if (event.keyCode == 37) {
                 Keyboard.ArrowLeft = false;
             }

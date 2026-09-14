@@ -8,20 +8,19 @@ export class Movable extends Drawable {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
-    offset = { 
+    offset = {
         top: 120, //we set smallest border for each moving object here with the help of offset
         right: 30,
         bottom: 30,
-        left: 30
+        left: 30,
     };
     rX; //real X
     rY; //real Y
     rW; //real width
     rH; //real height
     bottolSplash = false;
-    
-    constructor()
-    {
+
+    constructor() {
         super();
     }
 
@@ -30,7 +29,7 @@ export class Movable extends Drawable {
     }
 
     moveLeft() {
-    this.x -= this.speed;
+        this.x -= this.speed;
     }
 
     playAnimation(array) {
@@ -40,39 +39,39 @@ export class Movable extends Drawable {
         this.currentImage++;
     }
 
-    applyGravity=() =>{        
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }else {
-				this.y = 180;
-				this.speedY = 0;
-			}
-    }
+    applyGravity = () => {
+        if (this.isAboveGround() || this.speedY > 0) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+        } else {
+            this.y = 180;
+            this.speedY = 0;
+        }
+    };
 
-    isAboveGround(){
-        if(this.bottolFalling) //trwable obj should should always fall
+    isAboveGround() {
+        if (this.bottolFalling) //trwable obj should should always fall
         {
             return true;
-        }else{
+        } else {
             this.bottolFalling = false;
             return this.y < 180;
         }
-        
     }
 
     //charcater.isColliding(chicken);
     isColliding(mo) {
         this.getRealFrame();
         mo.getRealFrame();
-        return this.rX + this.rW > mo.rX &&
+        return (
+            this.rX + this.rW > mo.rX &&
             this.rY + this.rH > mo.rY &&
             this.rX < mo.rX + mo.rW &&
-            this.rY < mo.rY + mo.rH;
+            this.rY < mo.rY + mo.rH
+        );
     }
 
-    getRealFrame()
-    {
+    getRealFrame() {
         this.rX = this.x + this.offset.left;
         this.rY = this.y + this.offset.top;
         this.rW = this.width - this.offset.left - this.offset.right;
@@ -80,10 +79,12 @@ export class Movable extends Drawable {
     }
 
     hit() {
-        if(Globals.enemyBottolHit)//this use to cofirm the hit action on eenemy by bottol
+        if (
+            Globals.enemyBottolHit
+        ) //this use to cofirm the hit action on eenemy by bottol
         {
             this.energy = 0;
-        }else{
+        } else {
             Globals.enemyBottolHit = false;
             this.energy -= 1;
             if (this.energy < 0) {
@@ -92,9 +93,8 @@ export class Movable extends Drawable {
                 this.lastHit = new Date().getTime();
             }
         }
-        
     }
-    
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //diffrence in miliseconds
         timePassed = timePassed / 1000; //difference in seconds
@@ -104,5 +104,4 @@ export class Movable extends Drawable {
     isDead() {
         return this.energy == 0;
     }
-
 }

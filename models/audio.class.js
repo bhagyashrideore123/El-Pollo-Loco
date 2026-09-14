@@ -57,7 +57,7 @@ export class AudioHub {
     // Spielt eine einzelne Audiodatei ab
     static playOne(Sound) {
         if (Sound) {
-            Sound.file.volume = Globals.isMuted ? 0 : 0.05;
+            Sound.file.volume = Globals.isMuted ? 0 : 0.02;
             if (Sound.isPlaying === true) {
                 return;
             } else if (Sound.file.readyState > 0 || Sound.isLoaded) {
@@ -66,9 +66,7 @@ export class AudioHub {
                 Sound.file.play();
                 Sound.isPlaying = true;
             }
-        } else {
-            console.log("sound not loaded ");
-        }
+        } 
     }
 
     // Stoppt das Abspielen aller Audiodateien
@@ -85,13 +83,12 @@ export class AudioHub {
             Sounds.file.pause();
             Sounds.isPlaying = false;
         } catch (e) {
-            console.log(e);
         }
     }
 
 static applyMuteState() {
     AudioHub.allSounds.forEach((sound) => {
-        sound.file.volume = Globals.isMuted ? 0 : 0.05;
+        sound.file.volume = Globals.isMuted ? 0 : 0.02;
     });
 }
 }

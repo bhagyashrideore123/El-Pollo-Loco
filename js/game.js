@@ -11,14 +11,14 @@ let keyboardInitialized = false;
 function init() {
     Globals.canvas.style.display = "none";
     Globals.startGameScreen.style.display = "flex";
-    Globals.resControls.style.display = "none";
     Globals.lostScreen.style.display = "none";
     Globals.wonScreen.style.display = "none";
+    checkScreen(hoverCheck);
     startGameMusik();
 }
 
 function startGame() {
-    IntervalHub.stopAllIntervals();// kill every interval from the previous game/world
+    IntervalHub.stopAllIntervals(); // kill every interval from the previous game/world
     if (world) world.running = false; // stop the old draw loop before creating a new World
     AudioHub.playOne(AudioHub.GAME);
     Globals.canvas.style.display = "block";
@@ -33,7 +33,7 @@ function startGame() {
         Keyboard.bindBtnPressEvents(); // ← attach the touch controls
         keyboardInitialized = true;
     }
-    world = new World(Globals.canvas);    
+    world = new World(Globals.canvas);
     playBackgroundMusik();
 }
 
@@ -61,7 +61,8 @@ function enterFullScreen(element) {
     }
 }
 
-function checkScreen(mql) {//window.matchMedia() returns a MediaQueryList object, and that object supports a change event
+function checkScreen(mql) {
+    //window.matchMedia() returns a MediaQueryList object, and that object supports a change event
     if (mql.matches) {
         Globals.resControls.style.display = "flex";
     } else {
@@ -73,26 +74,17 @@ checkScreen(hoverCheck); // run once on load
 hoverCheck.addEventListener("change", () => checkScreen(hoverCheck)); // check live as well
 
 function toggleSound() {
-   
-        Globals.isMuted = !Globals.isMuted;
-        Globals.soundBtn.innerHTML = Globals.isMuted ? "🔇" : "🔊";
-        AudioHub.applyMuteState();
-        Globals.soundBtn.blur(); // give up focus so Space (jump) doesn't re-trigger this button
-  
+    Globals.isMuted = !Globals.isMuted;
+    Globals.soundBtn.innerHTML = Globals.isMuted ? "🔇" : "🔊";
+    AudioHub.applyMuteState();
+    Globals.soundBtn.blur(); // give up focus so Space (jump) doesn't re-trigger this button
 }
 
 function startGameMusik() {
-    try {
-        AudioHub.playOne(AudioHub.GAME_START_MUSIK);
-    } catch (e) {
-        console.log(e);
-    }
+    AudioHub.playOne(AudioHub.GAME_START_MUSIK);
 }
 function playBackgroundMusik() {
     AudioHub.playOne(AudioHub.GAME_BACKGROUND_MUSIK);
-}
-function endGameMusik() {
-    AudioHub.playOne(AudioHub.GAME);
 }
 
 Globals.startBtn.addEventListener("click", startGame);

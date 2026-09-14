@@ -4,7 +4,6 @@ import { ImageHub } from "./ImageHub.class.js";
 import { IntervalHub } from "./intervalHub.class.js";
 import { Movable } from "./movable.class.js";
 
-
 export class Throwable extends Movable {
     height = 60;
     width = 50;
@@ -13,12 +12,12 @@ export class Throwable extends Movable {
     isSplashing = false;
     BottleImage = ImageHub.SALSABOTTOL.bottle;
     BottoleRotation = ImageHub.SALSABOTTOL.rotation;
-    BottolSplash =  ImageHub.SALSABOTTOL.bottle_splash;
+    BottolSplash = ImageHub.SALSABOTTOL.bottle_splash;
     offset = {
         top: 10,
         right: 10,
         bottom: 10,
-        left: 10
+        left: 10,
     };
 
     constructor(_x, _y) {
@@ -40,11 +39,10 @@ export class Throwable extends Movable {
     };
 
     splash = () => {
-        if(this.isSplashing)return;
+        if (this.isSplashing) return;
         this.isSplashing = true;
         AudioHub.playOne(AudioHub.BOTTOL_SPLASH);
         // Play splash frames sequentially or loop through it
         this.playAnimation(this.BottolSplash);
-        
-    }
+    };
 }
