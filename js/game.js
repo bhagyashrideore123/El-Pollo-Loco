@@ -94,4 +94,12 @@ Globals.restartBtn.addEventListener("click", startGame);
 Globals.playAgainBtn.addEventListener("click", startGame);
 Globals.soundBtn.addEventListener("click", toggleSound);
 
+document.getElementById('impressumBtn').addEventListener('click', () => {
+    document.getElementById('impressumModal').style.display = 'flex';
+});
+
+document.getElementById('closeImpressum').addEventListener('click', () => {
+    document.getElementById('impressumModal').style.display = 'none';
+});
+
 init();

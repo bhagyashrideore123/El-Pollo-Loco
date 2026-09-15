@@ -240,7 +240,9 @@ button:active{
     justify-content: center;
     z-index: 2000;
 }
-
+.impressumLink{
+    cursor: pointer;
+}
 .modalBox {
     background: white;
     color: #2b2d42;
