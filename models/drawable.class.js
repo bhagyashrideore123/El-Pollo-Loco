@@ -1,5 +1,6 @@
 import { AudioHub } from "./audio.class.js";
 import { Globals } from "./globals.class.js";
+import { IntervalHub } from "./intervalHub.class.js";
 
 export class Drawable {
     x = 100;
@@ -31,8 +32,7 @@ export class Drawable {
         }
         try {
             contex.drawImage(this.img, this.x, this.y, this.width, this.height); //here we give movable object to canvas.
-        } catch (e) {
-        }
+        } catch (e) {}
     }
 
     drawFrame(contex) {
@@ -74,8 +74,12 @@ export class Drawable {
     }
 
     youLoseScreen() {
+        if (Globals.isGameOver) return; // already ended — don't re-trigger
+        Globals.isGameOver = true;
         Globals.YouLoose = true;
         Globals.YouWin = false;
+ IntervalHub.stopAllIntervals(); // freeze every moving/animating/checking thing at once
+
         setTimeout(() => {
             Globals.canvas.style.display = "none";
             Globals.startGameScreen.style.display = "none";
@@ -92,8 +96,12 @@ export class Drawable {
     }
 
     youWonScreen() {
+        if (Globals.isGameOver) return; // already ended — don't re-trigger
+        Globals.isGameOver = true;
         Globals.YouWin = true;
         Globals.YouLoose = false;
+ IntervalHub.stopAllIntervals(); // freeze every moving/animating/checking thing at once
+
         setTimeout(() => {
             Globals.canvas.style.display = "none";
             Globals.startGameScreen.style.display = "none";

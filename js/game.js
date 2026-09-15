@@ -20,6 +20,7 @@ function init() {
 function startGame() {
     IntervalHub.stopAllIntervals(); // kill every interval from the previous game/world
     if (world) world.running = false; // stop the old draw loop before creating a new World
+     Globals.isGameOver = false; // fresh start — clear the flag
     AudioHub.playOne(AudioHub.GAME);
     Globals.canvas.style.display = "block";
     Globals.startGameScreen.style.display = "none";

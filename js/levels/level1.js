@@ -32,7 +32,8 @@ export function initLevel() {
             new Clouds(1000),
             new Clouds(1600),
             new Clouds(2000),
-            new Clouds(3000),
+            new Clouds(2500),
+            new Clouds(2900),
         ],
         [
             new Background("img/5_background/layers/air.png"),

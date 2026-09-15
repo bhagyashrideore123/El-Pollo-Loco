@@ -37,14 +37,21 @@
         </div>
 
     </div>
-
+    <!-- modal, placed inside gameContainer or right after it -->
+    <div id="impressumModal" class="modalOverlay">
+        <div class="modalBox">
+            <button id="closeImpressum" class="modalClose">✕</button>
+            <h1>Impressum - El Pollo Loco</h1>
+            <!-- same content sections as before -->
+        </div>
+    </div>
     <!-- yopu lost screen -->
-    <div id="lostScreen" class="flexClass">
+    <div id="lostScreen" class="flexClass flexStyles">
         <img class="youLostImg" src="img/You won, you lost/You lost.png" alt="you_lost_screen">
         <button id="restart">Restart >></button>
     </div>
     <!-- you won screen -->
-    <div id="wonScreen" class="flexClass">
+    <div id="wonScreen" class="flexClass flexStyles">
         <img class="youWonImg" src="img/You won, you lost/You won A.png" alt="you_win_screen">
         <button id="playAgain">Play Again >></button>
     </div>
@@ -65,7 +72,7 @@
         <h3>Press D = Throw Bottles</h3>
     </div>
     </div>
-    <h2><a target="_blank" href="./impressum.html">Impressum</a></h2>
+   <button id="impressumBtn" class="impressumLink">Impressum</button>
 </body>
 
 </html>

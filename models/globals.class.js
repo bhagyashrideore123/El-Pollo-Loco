@@ -1,5 +1,6 @@
 
 export class Globals{
+    static isGameOver = false; // true once win or lose has triggered
     static startNewGame = false;
     static endBossAlert = false;
     static chickenDead = false;

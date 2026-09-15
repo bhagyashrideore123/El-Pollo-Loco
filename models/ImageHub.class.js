@@ -55,7 +55,13 @@ export class ImageHub {
             "img/2_character_pepe/3_jump/J-38.png",
             "img/2_character_pepe/3_jump/J-39.png",
         ],
-
+        snoring: [
+                "img/2_character_pepe/1_idle/long_idle/I-11.png", // ← replace with your actual snoring/long-idle frame paths
+                "img/2_character_pepe/1_idle/long_idle/I-12.png",
+                "img/2_character_pepe/1_idle/long_idle/I-13.png",
+                "img/2_character_pepe/1_idle/long_idle/I-14.png",
+                "img/2_character_pepe/1_idle/long_idle/I-15.png",
+            ],
         ideal: ["img/2_character_pepe/1_idle/long_idle/I-13.png"],
         dead: [
             "img/2_character_pepe/5_dead/D-51.png",

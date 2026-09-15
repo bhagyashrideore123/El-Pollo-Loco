@@ -47,6 +47,7 @@ export class World {
     }
 
     run = () => {
+        if (Globals.isGameOver) return; // in case run() gets called after stopAllIntervals somehow
         this.checkEnemyCollision();
         this.checkCollision();
     };
